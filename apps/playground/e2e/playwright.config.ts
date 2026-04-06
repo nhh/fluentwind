@@ -34,7 +34,7 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: 'pnpm preview',
+    command: 'npm run preview',
     port: 4173,
     cwd: '..',
     reuseExistingServer: !CI,

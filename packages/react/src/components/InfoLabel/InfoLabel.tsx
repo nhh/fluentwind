@@ -1,4 +1,4 @@
-import { forwardRef, useState, useRef, useEffect, useCallback } from 'react';
+import { forwardRef, useState, useRef, useEffect } from 'react';
 import { cn } from '../../utils/cn';
 import { Label } from '../Label/Label';
 import type { InfoLabelProps } from './InfoLabel.types';
@@ -27,7 +27,7 @@ export const InfoLabel = forwardRef<HTMLLabelElement, InfoLabelProps>(
     }, [open]);
 
     return (
-      <span className="inline-flex items-center gap-xxs">
+      <div className="flex items-center gap-xxs w-fit">
         <Label ref={ref} className={className} {...props}>
           {children}
         </Label>
@@ -69,7 +69,7 @@ export const InfoLabel = forwardRef<HTMLLabelElement, InfoLabelProps>(
             </div>
           )}
         </span>
-      </span>
+      </div>
     );
   },
 );

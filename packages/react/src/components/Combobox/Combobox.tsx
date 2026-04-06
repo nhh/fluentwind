@@ -30,13 +30,17 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     },
     ref,
   ) => {
+    const isControlled = value !== undefined;
+    const [internalValue, setInternalValue] = useState<string | undefined>(undefined);
+    const selected = isControlled ? value : internalValue;
+
     const [open, setOpen] = useState(false);
     const [query, setQuery] = useState('');
     const [activeIndex, setActiveIndex] = useState(-1);
     const listboxId = useId();
     const wrapperRef = useRef<HTMLDivElement>(null);
 
-    const selectedOption = options.find((o) => o.value === value);
+    const selectedOption = options.find((o) => o.value === selected);
     const filtered = options.filter((o) => o.label.toLowerCase().includes(query.toLowerCase()));
 
     useEffect(() => {
@@ -51,12 +55,13 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
 
     const select = useCallback(
       (val: string) => {
+        if (!isControlled) setInternalValue(val);
         onChange?.(val);
         setQuery('');
         setOpen(false);
         setActiveIndex(-1);
       },
-      [onChange],
+      [isControlled, onChange],
     );
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -110,14 +115,14 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                 key={opt.value}
                 id={`${listboxId}-${i}`}
                 role="option"
-                aria-selected={opt.value === value}
+                aria-selected={opt.value === selected}
                 aria-disabled={opt.disabled}
                 onMouseDown={(e) => { e.preventDefault(); if (!opt.disabled) select(opt.value); }}
                 onMouseEnter={() => setActiveIndex(i)}
                 className={cn(
                   'px-s py-xs cursor-pointer text-300 leading-300 text-neutral-foreground-1',
                   i === activeIndex && 'bg-neutral-background-1-hover',
-                  opt.value === value && 'bg-brand-background-2 text-brand-foreground-1',
+                  opt.value === selected && 'bg-brand-background-2 text-brand-foreground-1',
                   opt.disabled && 'opacity-50 cursor-not-allowed',
                 )}
               >

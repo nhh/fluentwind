@@ -43,6 +43,25 @@ export const SpinButton = forwardRef<HTMLInputElement, SpinButtonProps>(
       [onChange, min, max],
     );
 
+    const handleKeyDown = useCallback(
+      (e: React.KeyboardEvent) => {
+        if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          setValue(value + step);
+        } else if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          setValue(value - step);
+        } else if (e.key === 'Home' && min !== -Infinity) {
+          e.preventDefault();
+          setValue(min);
+        } else if (e.key === 'End' && max !== Infinity) {
+          e.preventDefault();
+          setValue(max);
+        }
+      },
+      [value, step, setValue, min, max],
+    );
+
     const btnClass = 'px-xxs text-neutral-foreground-3 hover:text-neutral-foreground-1 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed';
 
     return (
@@ -68,6 +87,7 @@ export const SpinButton = forwardRef<HTMLInputElement, SpinButtonProps>(
           aria-valuemax={max !== Infinity ? max : undefined}
           disabled={disabled}
           value={value}
+          onKeyDown={handleKeyDown}
           onChange={(e) => {
             const n = Number(e.target.value);
             if (!Number.isNaN(n)) setValue(n);

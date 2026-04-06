@@ -1,16 +1,9 @@
 import { test, expect, type Theme } from '../fixtures/base';
+import { ALL_COMPONENTS } from '../helpers/components';
 
 const THEMES: Theme[] = ['web-light', 'web-dark', 'teams-light', 'teams-dark', 'high-contrast'];
 
-// Representative components from each category for multi-theme visual testing
-const KEY_COMPONENTS = [
-  'Button', 'Input', 'Select', 'Checkbox', 'Switch',
-  'Dialog', 'Table', 'Card', 'Alert', 'Badge',
-  'Nav', 'Tablist', 'Accordion', 'DatePicker', 'Toast',
-  'Spinner', 'ProgressBar', 'Avatar', 'Tag', 'Menu',
-];
-
-for (const component of KEY_COMPONENTS) {
+for (const component of ALL_COMPONENTS) {
   test.describe(`Visual: ${component}`, () => {
     for (const theme of THEMES) {
       test(`renders correctly in ${theme}`, async ({ page, navigateToComponent, switchTheme }) => {

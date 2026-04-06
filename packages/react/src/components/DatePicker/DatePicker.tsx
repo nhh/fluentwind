@@ -145,6 +145,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
 
     const containerRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
+    const skipOpenRef = useRef(false);
 
     const today = useMemo(() => {
       const d = new Date();
@@ -175,6 +176,10 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
 
     const handleOpen = () => {
       if (disabled) return;
+      if (skipOpenRef.current) {
+        skipOpenRef.current = false;
+        return;
+      }
       setOpen(true);
       setViewDate(selected ?? new Date());
       setInputText(selected ? formatDate(selected) : '');
@@ -188,6 +193,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       if (isDateDisabled(date)) return;
       setDate(date);
       setInputText(formatDate(date));
+      skipOpenRef.current = true;
       handleClose();
       inputRef.current?.focus();
     };
