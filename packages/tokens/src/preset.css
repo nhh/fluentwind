@@ -6,23 +6,262 @@
      @import '@fluentwind/tokens/preset.css';
    ========================================================================== */
 
-/* Custom variants */
-@import './utils/custom-variants.css';
-
 /* Global raw values */
 @import './themes/global-tokens.css';
 
-/* Theme files (semantic token values) */
+/* Theme files (semantic token values per theme) */
 @import './themes/web-light.css';
 @import './themes/web-dark.css';
 @import './themes/teams-light.css';
 @import './themes/teams-dark.css';
 @import './themes/high-contrast.css';
 
-/* @theme token mappings (generate Tailwind utilities) */
-@import './tokens/colors.css';
-@import './tokens/typography.css';
-@import './tokens/spacing.css';
-@import './tokens/borders.css';
-@import './tokens/shadows.css';
-@import './tokens/motion.css';
+/* Custom variants */
+@custom-variant dark (&:where([data-theme$="-dark"], [data-theme$="-dark"] *));
+@custom-variant hc (&:where([data-theme="high-contrast"], [data-theme="high-contrast"] *));
+
+/* ==========================================================================
+   @theme — All Fluent 2 tokens in one block
+   Tailwind v4 generates utility classes from these.
+   Namespace rules:
+     --color-*    → bg-*, text-*, border-*, ring-*, etc.
+     --spacing-*  → p-*, m-*, gap-*, px-*, etc. (class = p-{name}, NOT p-spacing-{name})
+     --radius-*   → rounded-*
+     --shadow-*   → shadow-*
+     --text-*     → text-* (font size, e.g. text-300 = 14px)
+     --leading-*  → leading-*
+     --font-*     → font-* (font family)
+     --font-weight-* → font-* (weight)
+     --duration-* → duration-*
+     --ease-*     → ease-*
+     --breakpoint-* → sm:, md:, etc.
+     --border-*   → border-* (width)
+   ========================================================================== */
+
+@theme {
+  /* ===== COLORS ===== */
+
+  /* Neutral Foreground */
+  --color-neutral-foreground-1: var(--fw-neutral-foreground-1);
+  --color-neutral-foreground-2: var(--fw-neutral-foreground-2);
+  --color-neutral-foreground-3: var(--fw-neutral-foreground-3);
+  --color-neutral-foreground-4: var(--fw-neutral-foreground-4);
+  --color-neutral-foreground-disabled: var(--fw-neutral-foreground-disabled);
+  --color-neutral-foreground-inverted: var(--fw-neutral-foreground-inverted);
+  --color-neutral-foreground-on-brand: var(--fw-neutral-foreground-on-brand);
+
+  /* Neutral Background */
+  --color-neutral-background-1: var(--fw-neutral-background-1);
+  --color-neutral-background-1-hover: var(--fw-neutral-background-1-hover);
+  --color-neutral-background-1-pressed: var(--fw-neutral-background-1-pressed);
+  --color-neutral-background-1-selected: var(--fw-neutral-background-1-selected);
+  --color-neutral-background-2: var(--fw-neutral-background-2);
+  --color-neutral-background-3: var(--fw-neutral-background-3);
+  --color-neutral-background-3-hover: var(--fw-neutral-background-3-hover);
+  --color-neutral-background-3-pressed: var(--fw-neutral-background-3-pressed);
+  --color-neutral-background-4: var(--fw-neutral-background-4);
+  --color-neutral-background-5: var(--fw-neutral-background-5);
+  --color-neutral-background-6: var(--fw-neutral-background-6);
+  --color-neutral-background-inverted: var(--fw-neutral-background-inverted);
+  --color-neutral-background-static: var(--fw-neutral-background-static);
+  --color-neutral-background-subtle: var(--fw-neutral-background-subtle);
+  --color-neutral-background-disabled: var(--fw-neutral-background-disabled);
+
+  /* Neutral Stroke */
+  --color-neutral-stroke-1: var(--fw-neutral-stroke-1);
+  --color-neutral-stroke-1-hover: var(--fw-neutral-stroke-1-hover);
+  --color-neutral-stroke-1-pressed: var(--fw-neutral-stroke-1-pressed);
+  --color-neutral-stroke-2: var(--fw-neutral-stroke-2);
+  --color-neutral-stroke-3: var(--fw-neutral-stroke-3);
+  --color-neutral-stroke-accessible: var(--fw-neutral-stroke-accessible);
+  --color-neutral-stroke-accessible-hover: var(--fw-neutral-stroke-accessible-hover);
+  --color-neutral-stroke-accessible-pressed: var(--fw-neutral-stroke-accessible-pressed);
+  --color-neutral-stroke-disabled: var(--fw-neutral-stroke-disabled);
+  --color-neutral-stroke-focus-1: var(--fw-neutral-stroke-focus-1);
+  --color-neutral-stroke-focus-2: var(--fw-neutral-stroke-focus-2);
+
+  /* Brand */
+  --color-brand-background: var(--fw-brand-background);
+  --color-brand-background-hover: var(--fw-brand-background-hover);
+  --color-brand-background-pressed: var(--fw-brand-background-pressed);
+  --color-brand-background-selected: var(--fw-brand-background-selected);
+  --color-brand-background-2: var(--fw-brand-background-2);
+  --color-brand-background-2-hover: var(--fw-brand-background-2-hover);
+  --color-brand-background-2-pressed: var(--fw-brand-background-2-pressed);
+  --color-brand-background-inverted: var(--fw-brand-background-inverted);
+  --color-brand-background-static: var(--fw-brand-background-static);
+  --color-brand-foreground-1: var(--fw-brand-foreground-1);
+  --color-brand-foreground-2: var(--fw-brand-foreground-2);
+  --color-brand-foreground-link: var(--fw-brand-foreground-link);
+  --color-brand-foreground-link-hover: var(--fw-brand-foreground-link-hover);
+  --color-brand-foreground-link-pressed: var(--fw-brand-foreground-link-pressed);
+  --color-brand-foreground-inverted: var(--fw-brand-foreground-inverted);
+  --color-brand-foreground-on-light: var(--fw-brand-foreground-on-light);
+  --color-brand-stroke-1: var(--fw-brand-stroke-1);
+  --color-brand-stroke-2: var(--fw-brand-stroke-2);
+
+  /* Subtle */
+  --color-subtle-background: var(--fw-subtle-background);
+  --color-subtle-background-hover: var(--fw-subtle-background-hover);
+  --color-subtle-background-pressed: var(--fw-subtle-background-pressed);
+  --color-subtle-background-selected: var(--fw-subtle-background-selected);
+
+  /* Transparent */
+  --color-transparent-background: var(--fw-transparent-background);
+  --color-transparent-stroke: var(--fw-transparent-stroke);
+
+  /* Status */
+  --color-status-danger: var(--fw-status-danger);
+  --color-status-danger-background-1: var(--fw-status-danger-background-1);
+  --color-status-danger-background-3: var(--fw-status-danger-background-3);
+  --color-status-danger-foreground-1: var(--fw-status-danger-foreground-1);
+  --color-status-danger-foreground-3: var(--fw-status-danger-foreground-3);
+  --color-status-danger-stroke-1: var(--fw-status-danger-stroke-1);
+  --color-status-success: var(--fw-status-success);
+  --color-status-success-background-1: var(--fw-status-success-background-1);
+  --color-status-success-background-3: var(--fw-status-success-background-3);
+  --color-status-success-foreground-1: var(--fw-status-success-foreground-1);
+  --color-status-success-foreground-3: var(--fw-status-success-foreground-3);
+  --color-status-success-stroke-1: var(--fw-status-success-stroke-1);
+  --color-status-warning: var(--fw-status-warning);
+  --color-status-warning-background-1: var(--fw-status-warning-background-1);
+  --color-status-warning-background-3: var(--fw-status-warning-background-3);
+  --color-status-warning-foreground-1: var(--fw-status-warning-foreground-1);
+  --color-status-warning-foreground-3: var(--fw-status-warning-foreground-3);
+  --color-status-warning-stroke-1: var(--fw-status-warning-stroke-1);
+
+  /* Brand Ramp (raw steps) */
+  --color-brand-10: var(--fw-brand-10);
+  --color-brand-20: var(--fw-brand-20);
+  --color-brand-30: var(--fw-brand-30);
+  --color-brand-40: var(--fw-brand-40);
+  --color-brand-50: var(--fw-brand-50);
+  --color-brand-60: var(--fw-brand-60);
+  --color-brand-70: var(--fw-brand-70);
+  --color-brand-80: var(--fw-brand-80);
+  --color-brand-90: var(--fw-brand-90);
+  --color-brand-100: var(--fw-brand-100);
+  --color-brand-110: var(--fw-brand-110);
+  --color-brand-120: var(--fw-brand-120);
+  --color-brand-130: var(--fw-brand-130);
+  --color-brand-140: var(--fw-brand-140);
+  --color-brand-150: var(--fw-brand-150);
+  --color-brand-160: var(--fw-brand-160);
+
+  /* ===== TYPOGRAPHY ===== */
+
+  /* Font Families */
+  --font-base: 'Segoe UI', 'Segoe UI Web (West European)', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
+  --font-mono: Consolas, 'Courier New', Courier, monospace;
+  --font-numeric: Bahnschrift, 'Segoe UI', 'Segoe UI Web (West European)', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
+
+  /* Font Sizes → text-100 through text-1000
+     Each includes a --line-height sub-property so text-300 sets both font-size AND line-height */
+  --text-100: 10px;
+  --text-100--line-height: 14px;
+  --text-200: 12px;
+  --text-200--line-height: 16px;
+  --text-300: 14px;
+  --text-300--line-height: 20px;
+  --text-400: 16px;
+  --text-400--line-height: 22px;
+  --text-500: 20px;
+  --text-500--line-height: 28px;
+  --text-600: 24px;
+  --text-600--line-height: 32px;
+  --text-700: 28px;
+  --text-700--line-height: 36px;
+  --text-800: 32px;
+  --text-800--line-height: 40px;
+  --text-900: 40px;
+  --text-900--line-height: 52px;
+  --text-1000: 68px;
+  --text-1000--line-height: 92px;
+
+  /* Standalone Line Heights → leading-100 through leading-1000 (for manual override) */
+  --leading-100: 14px;
+  --leading-200: 16px;
+  --leading-300: 20px;
+  --leading-400: 22px;
+  --leading-500: 28px;
+  --leading-600: 32px;
+  --leading-700: 36px;
+  --leading-800: 40px;
+  --leading-900: 52px;
+  --leading-1000: 92px;
+
+  /* Font Weights → font-regular, font-medium, font-semibold, font-bold */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* ===== SPACING ===== */
+  /* --spacing-* → p-none, m-xxs, gap-xs, px-s, py-m, etc. */
+  --spacing-none: 0px;
+  --spacing-xxs: 2px;
+  --spacing-xs: 4px;
+  --spacing-s-nudge: 6px;
+  --spacing-s: 8px;
+  --spacing-m-nudge: 10px;
+  --spacing-m: 12px;
+  --spacing-l: 16px;
+  --spacing-xl: 20px;
+  --spacing-xxl: 24px;
+  --spacing-xxxl: 32px;
+
+  /* ===== BORDER RADIUS ===== */
+  --radius-none: 0px;
+  --radius-small: 2px;
+  --radius-medium: 4px;
+  --radius-large: 6px;
+  --radius-xlarge: 8px;
+  --radius-2xlarge: 12px;
+  --radius-3xlarge: 16px;
+  --radius-4xlarge: 24px;
+  --radius-5xlarge: 32px;
+  --radius-6xlarge: 40px;
+  --radius-circular: 10000px;
+
+  /* ===== BORDER WIDTHS ===== */
+  --border-thin: 1px;
+  --border-thick: 2px;
+  --border-thicker: 3px;
+  --border-thickest: 4px;
+
+  /* ===== SHADOWS ===== */
+  --shadow-2: var(--fw-shadow-2);
+  --shadow-4: var(--fw-shadow-4);
+  --shadow-8: var(--fw-shadow-8);
+  --shadow-16: var(--fw-shadow-16);
+  --shadow-28: var(--fw-shadow-28);
+  --shadow-64: var(--fw-shadow-64);
+
+  /* ===== MOTION ===== */
+  --duration-ultra-fast: 50ms;
+  --duration-faster: 100ms;
+  --duration-fast: 150ms;
+  --duration-normal: 200ms;
+  --duration-gentle: 250ms;
+  --duration-slow: 300ms;
+  --duration-slower: 400ms;
+  --duration-ultra-slow: 500ms;
+
+  --ease-accelerate-max: cubic-bezier(0.9, 0.1, 1, 0.2);
+  --ease-accelerate-mid: cubic-bezier(1, 0, 1, 1);
+  --ease-accelerate-min: cubic-bezier(0.8, 0, 0.78, 1);
+  --ease-decelerate-max: cubic-bezier(0.1, 0.9, 0.2, 1);
+  --ease-decelerate-mid: cubic-bezier(0, 0, 0, 1);
+  --ease-decelerate-min: cubic-bezier(0.33, 0, 0.1, 1);
+  --ease-easy-max: cubic-bezier(0.8, 0, 0.2, 1);
+  --ease-easy: cubic-bezier(0.33, 0, 0.67, 1);
+  --ease-linear: cubic-bezier(0, 0, 1, 1);
+
+  /* ===== BREAKPOINTS ===== */
+  --breakpoint-xs: 320px;
+  --breakpoint-sm: 480px;
+  --breakpoint-md: 640px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1366px;
+  --breakpoint-2xl: 1920px;
+}

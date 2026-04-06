@@ -62,8 +62,8 @@
 
   /* --- Brand Colors --- */
   --fw-brand-background: #115ea3;
-  --fw-brand-background-hover: #0f548c;
-  --fw-brand-background-pressed: #0e4775;
+  --fw-brand-background-hover: #0f6cbd;
+  --fw-brand-background-pressed: #0c3b5e;
   --fw-brand-background-selected: #0f6cbd;
   --fw-brand-background-2: #082338;
   --fw-brand-background-2-hover: #0a2e4a;
@@ -100,19 +100,19 @@
   --fw-status-danger-background-1: #3f1011;
   --fw-status-danger-background-3: #c50f1f;
   --fw-status-danger-foreground-1: #dc626d;
-  --fw-status-danger-foreground-3: #000000;
+  --fw-status-danger-foreground-3: #d33f4c;
   --fw-status-danger-stroke-1: #dc626d;
   --fw-status-success: #107c10;
   --fw-status-success-background-1: #052505;
   --fw-status-success-background-3: #107c10;
   --fw-status-success-foreground-1: #54b054;
-  --fw-status-success-foreground-3: #000000;
+  --fw-status-success-foreground-3: #218c21;
   --fw-status-success-stroke-1: #54b054;
   --fw-status-warning: #da3b01;
   --fw-status-warning-background-1: #4a1e04;
   --fw-status-warning-background-3: #da3b01;
   --fw-status-warning-foreground-1: #ef9e7e;
-  --fw-status-warning-foreground-3: #000000;
+  --fw-status-warning-foreground-3: #e8825d;
   --fw-status-warning-stroke-1: #ef9e7e;
 
   /* --- Shadows --- */

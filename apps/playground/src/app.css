@@ -1,2 +1,20 @@
 @import 'tailwindcss';
-@import '@fluentwind/tokens/preset.css';
+@import '@fluentwind/tokens/preset.css' theme(static);
+
+/* Tell Tailwind to scan the component library source for class names */
+@source "../../../packages/react/src";
+
+/* Shiki code blocks */
+.shiki-block pre {
+  margin: 0;
+  padding: 16px;
+  overflow-x: auto;
+  font-family: Consolas, 'Courier New', Courier, monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  border-radius: 4px;
+}
+
+.shiki-block code {
+  font-family: inherit;
+}

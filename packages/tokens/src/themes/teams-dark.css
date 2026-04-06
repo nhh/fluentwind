@@ -30,17 +30,17 @@
   --fw-neutral-foreground-inverted: #242424;
   --fw-neutral-foreground-on-brand: #ffffff;
 
-  /* --- Neutral Background --- */
+  /* --- Neutral Background (shifted +2 grey steps vs web-dark) --- */
   --fw-neutral-background-1: #292929;
-  --fw-neutral-background-1-hover: #333333;
-  --fw-neutral-background-1-pressed: #1a1a1a;
-  --fw-neutral-background-1-selected: #1f1f1f;
-  --fw-neutral-background-2: #1f1f1f;
-  --fw-neutral-background-3: #141414;
-  --fw-neutral-background-3-hover: #1f1f1f;
-  --fw-neutral-background-3-pressed: #0a0a0a;
-  --fw-neutral-background-4: #0a0a0a;
-  --fw-neutral-background-5: #000000;
+  --fw-neutral-background-1-hover: #3d3d3d;
+  --fw-neutral-background-1-pressed: #1f1f1f;
+  --fw-neutral-background-1-selected: #242424;
+  --fw-neutral-background-2: #242424;
+  --fw-neutral-background-3: #1f1f1f;
+  --fw-neutral-background-3-hover: #242424;
+  --fw-neutral-background-3-pressed: #141414;
+  --fw-neutral-background-4: #141414;
+  --fw-neutral-background-5: #0a0a0a;
   --fw-neutral-background-6: #333333;
   --fw-neutral-background-inverted: #ffffff;
   --fw-neutral-background-static: #333333;
@@ -62,8 +62,8 @@
 
   /* --- Brand Colors (Teams mapped to dark) --- */
   --fw-brand-background: #4f52b2;
-  --fw-brand-background-hover: #444791;
-  --fw-brand-background-pressed: #3d3e78;
+  --fw-brand-background-hover: #5b5fc7;
+  --fw-brand-background-pressed: #383966;
   --fw-brand-background-selected: #5b5fc7;
   --fw-brand-background-2: #2f2f4a;
   --fw-brand-background-2-hover: #333357;
@@ -71,7 +71,7 @@
   --fw-brand-background-inverted: #ffffff;
   --fw-brand-background-static: #5b5fc7;
   --fw-brand-foreground-1: #7f85f5;
-  --fw-brand-foreground-2: #9299f7;
+  --fw-brand-foreground-2: #aab1fa;
   --fw-brand-foreground-link: #7f85f5;
   --fw-brand-foreground-link-hover: #9299f7;
   --fw-brand-foreground-link-pressed: #7f85f5;
@@ -100,19 +100,19 @@
   --fw-status-danger-background-1: #3f1011;
   --fw-status-danger-background-3: #c50f1f;
   --fw-status-danger-foreground-1: #dc626d;
-  --fw-status-danger-foreground-3: #000000;
+  --fw-status-danger-foreground-3: #d33f4c;
   --fw-status-danger-stroke-1: #dc626d;
   --fw-status-success: #107c10;
   --fw-status-success-background-1: #052505;
   --fw-status-success-background-3: #107c10;
   --fw-status-success-foreground-1: #54b054;
-  --fw-status-success-foreground-3: #000000;
+  --fw-status-success-foreground-3: #218c21;
   --fw-status-success-stroke-1: #54b054;
   --fw-status-warning: #da3b01;
   --fw-status-warning-background-1: #4a1e04;
   --fw-status-warning-background-3: #da3b01;
   --fw-status-warning-foreground-1: #ef9e7e;
-  --fw-status-warning-foreground-3: #000000;
+  --fw-status-warning-foreground-3: #e8825d;
   --fw-status-warning-stroke-1: #ef9e7e;
 
   /* --- Shadows --- */

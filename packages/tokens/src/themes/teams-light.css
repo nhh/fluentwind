@@ -73,7 +73,7 @@
   --fw-brand-foreground-1: #5b5fc7;
   --fw-brand-foreground-2: #4f52b2;
   --fw-brand-foreground-link: #4f52b2;
-  --fw-brand-foreground-link-hover: #3d3e78;
+  --fw-brand-foreground-link-hover: #444791;
   --fw-brand-foreground-link-pressed: #383966;
   --fw-brand-foreground-inverted: #7f85f5;
   --fw-brand-foreground-on-light: #5b5fc7;
@@ -111,7 +111,7 @@
   --fw-status-warning: #da3b01;
   --fw-status-warning-background-1: #fdf6f3;
   --fw-status-warning-background-3: #da3b01;
-  --fw-status-warning-foreground-1: #de590b;
+  --fw-status-warning-foreground-1: #bc4b09;
   --fw-status-warning-foreground-3: #ffffff;
   --fw-status-warning-stroke-1: #da3b01;
 

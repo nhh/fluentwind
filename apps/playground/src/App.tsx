@@ -1,109 +1,152 @@
-import { useState } from 'react';
-import { FluentWindProvider, useTheme } from '@fluentwind/react';
+import { useState, useEffect } from 'react';
+import { FluentWindProvider, useTheme, Empty } from '@fluentwind/react';
 import type { Theme } from '@fluentwind/tokens';
+import { ComponentPage } from './components/ComponentPage';
+import { registry } from './demos/registry';
+
+const categories = [
+  {
+    label: 'General',
+    items: ['Button', 'Text', 'Label', 'Link', 'Icon', 'Image', 'Divider'],
+  },
+  {
+    label: 'Data Display',
+    items: ['Avatar', 'AvatarGroup', 'Badge', 'Card', 'Persona', 'Tag', 'Statistic', 'Empty', 'Table', 'List', 'Tree', 'Timeline', 'Skeleton', 'Carousel'],
+  },
+  {
+    label: 'Form',
+    items: ['Input', 'Textarea', 'Searchbox', 'Select', 'Combobox', 'Checkbox', 'RadioGroup', 'Switch', 'Slider', 'SpinButton', 'DatePicker', 'TimePicker', 'ColorPicker', 'Upload', 'Transfer', 'Field', 'Segmented', 'TagPicker', 'Rating'],
+  },
+  {
+    label: 'Navigation',
+    items: ['Tablist', 'Breadcrumb', 'Nav', 'Toolbar', 'Pagination', 'Steps'],
+  },
+  {
+    label: 'Feedback',
+    items: ['Spinner', 'ProgressBar', 'Alert', 'MessageBar', 'Toast', 'Popconfirm'],
+  },
+  {
+    label: 'Overlay',
+    items: ['Dialog', 'Drawer', 'Popover', 'Tooltip', 'Menu', 'Dropdown', 'InfoLabel'],
+  },
+  {
+    label: 'Layout',
+    items: ['Accordion', 'FloatButton'],
+  },
+];
+
+const themes: { value: Theme; label: string }[] = [
+  { value: 'web-light', label: 'Light' },
+  { value: 'web-dark', label: 'Dark' },
+  { value: 'teams-light', label: 'Teams' },
+  { value: 'teams-dark', label: 'Teams Dark' },
+  { value: 'high-contrast', label: 'HC' },
+];
+
+function getHashComponent(): string {
+  const hash = window.location.hash.replace('#', '');
+  return hash || 'Button';
+}
 
 function ThemeSwitcher() {
   const { theme, setTheme } = useTheme();
-  const themes: Theme[] = ['web-light', 'web-dark', 'teams-light', 'teams-dark'];
 
   return (
-    <div className="flex gap-spacing-s mb-spacing-l">
+    <div className="flex flex-wrap gap-xxs">
       {themes.map((t) => (
         <button
-          key={t}
-          onClick={() => setTheme(t)}
-          className={`px-spacing-m py-spacing-s rounded-medium text-300 transition-colors duration-fast ${
-            theme === t
-              ? 'bg-brand-background text-neutral-foreground-on-brand'
-              : 'bg-neutral-background-3 text-neutral-foreground-1 hover:bg-neutral-background-3-hover'
+          key={t.value}
+          type="button"
+          onClick={() => setTheme(t.value)}
+          className={`px-s py-xxs text-100 rounded-medium border cursor-pointer transition-colors ${
+            theme === t.value
+              ? 'bg-brand-background-2 text-brand-foreground-2 border-brand-stroke-1'
+              : 'bg-neutral-background-1 text-neutral-foreground-2 border-neutral-stroke-2 hover:bg-subtle-background-hover'
           }`}
         >
-          {t}
+          {t.label}
         </button>
       ))}
     </div>
   );
 }
 
-function TokenShowcase() {
+function Sidebar({
+  selected,
+  onSelect,
+}: {
+  selected: string;
+  onSelect: (name: string) => void;
+}) {
   return (
-    <div className="space-y-spacing-l">
-      <h1 className="text-800 font-semibold text-neutral-foreground-1 leading-800">
-        FluentWind Playground
-      </h1>
+    <aside className="fixed top-0 left-0 bottom-0 w-64 bg-neutral-background-1 border-r border-neutral-stroke-2 flex flex-col overflow-hidden">
+      <div className="p-m space-y-s border-b border-neutral-stroke-2">
+        <h1 className="text-500 leading-500 font-semibold text-neutral-foreground-1">FluentWind</h1>
+        <ThemeSwitcher />
+      </div>
 
-      <section>
-        <h2 className="text-600 font-semibold text-neutral-foreground-1 leading-600 mb-spacing-m">
-          Colors
-        </h2>
-        <div className="flex gap-spacing-s flex-wrap">
-          <div className="w-16 h-16 rounded-medium bg-brand-background" title="brand-background" />
-          <div
-            className="w-16 h-16 rounded-medium bg-neutral-background-1 border border-neutral-stroke-1"
-            title="neutral-background-1"
-          />
-          <div className="w-16 h-16 rounded-medium bg-neutral-background-3" title="neutral-background-3" />
-          <div className="w-16 h-16 rounded-medium bg-neutral-background-inverted" title="neutral-background-inverted" />
-          <div className="w-16 h-16 rounded-medium bg-status-danger" title="status-danger" />
-          <div className="w-16 h-16 rounded-medium bg-status-success" title="status-success" />
-          <div className="w-16 h-16 rounded-medium bg-status-warning" title="status-warning" />
-        </div>
-      </section>
-
-      <section>
-        <h2 className="text-600 font-semibold text-neutral-foreground-1 leading-600 mb-spacing-m">
-          Typography
-        </h2>
-        <p className="text-100 leading-100 text-neutral-foreground-1">Caption 2 (10px)</p>
-        <p className="text-200 leading-200 text-neutral-foreground-1">Caption 1 (12px)</p>
-        <p className="text-300 leading-300 text-neutral-foreground-1">Body 1 (14px)</p>
-        <p className="text-400 leading-400 text-neutral-foreground-1">Subtitle 2 (16px)</p>
-        <p className="text-500 leading-500 text-neutral-foreground-1">Subtitle 1 (20px)</p>
-        <p className="text-600 leading-600 text-neutral-foreground-1">Title 3 (24px)</p>
-        <p className="text-700 leading-700 text-neutral-foreground-1">Title 2 (28px)</p>
-        <p className="text-800 leading-800 text-neutral-foreground-1">Title 1 (32px)</p>
-        <p className="text-900 leading-900 text-neutral-foreground-1">Large Title (40px)</p>
-      </section>
-
-      <section>
-        <h2 className="text-600 font-semibold text-neutral-foreground-1 leading-600 mb-spacing-m">
-          Shadows
-        </h2>
-        <div className="flex gap-spacing-l flex-wrap">
-          <div className="w-24 h-24 rounded-large bg-neutral-background-1 shadow-2 flex items-center justify-center text-200 text-neutral-foreground-2">shadow-2</div>
-          <div className="w-24 h-24 rounded-large bg-neutral-background-1 shadow-4 flex items-center justify-center text-200 text-neutral-foreground-2">shadow-4</div>
-          <div className="w-24 h-24 rounded-large bg-neutral-background-1 shadow-8 flex items-center justify-center text-200 text-neutral-foreground-2">shadow-8</div>
-          <div className="w-24 h-24 rounded-large bg-neutral-background-1 shadow-16 flex items-center justify-center text-200 text-neutral-foreground-2">shadow-16</div>
-          <div className="w-24 h-24 rounded-large bg-neutral-background-1 shadow-28 flex items-center justify-center text-200 text-neutral-foreground-2">shadow-28</div>
-          <div className="w-24 h-24 rounded-large bg-neutral-background-1 shadow-64 flex items-center justify-center text-200 text-neutral-foreground-2">shadow-64</div>
-        </div>
-      </section>
-
-      <section>
-        <h2 className="text-600 font-semibold text-neutral-foreground-1 leading-600 mb-spacing-m">
-          Border Radius
-        </h2>
-        <div className="flex gap-spacing-s items-end flex-wrap">
-          <div className="w-16 h-16 bg-brand-background rounded-none" title="none" />
-          <div className="w-16 h-16 bg-brand-background rounded-small" title="small" />
-          <div className="w-16 h-16 bg-brand-background rounded-medium" title="medium" />
-          <div className="w-16 h-16 bg-brand-background rounded-large" title="large" />
-          <div className="w-16 h-16 bg-brand-background rounded-xlarge" title="xlarge" />
-          <div className="w-16 h-16 bg-brand-background rounded-circular" title="circular" />
-        </div>
-      </section>
-    </div>
+      <nav className="flex-1 overflow-y-auto p-s space-y-m">
+        {categories.map((category) => (
+          <div key={category.label}>
+            <h2 className="text-100 uppercase font-semibold text-neutral-foreground-3 px-m mb-xxs tracking-wide">
+              {category.label}
+            </h2>
+            <ul>
+              {category.items.map((item) => (
+                <li key={item}>
+                  <button
+                    type="button"
+                    onClick={() => onSelect(item)}
+                    className={`w-full text-left text-200 px-m py-xs rounded-medium cursor-pointer transition-colors ${
+                      selected === item
+                        ? 'bg-brand-background-2 text-brand-foreground-2 font-medium'
+                        : 'text-neutral-foreground-2 hover:bg-subtle-background-hover'
+                    }`}
+                  >
+                    {item}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </nav>
+    </aside>
   );
+}
+
+function Content({ selected }: { selected: string }) {
+  const page = registry[selected];
+
+  if (page) {
+    return <ComponentPage {...page} />;
+  }
+
+  return <Empty description={`Demo for ${selected} coming soon.`} />;
 }
 
 export default function App() {
   const [theme, setTheme] = useState<Theme>('web-light');
+  const [selected, setSelected] = useState<string>(getHashComponent);
+
+  useEffect(() => {
+    const onHashChange = () => setSelected(getHashComponent());
+    window.addEventListener('hashchange', onHashChange);
+    return () => window.removeEventListener('hashchange', onHashChange);
+  }, []);
+
+  const handleSelect = (name: string) => {
+    window.location.hash = name;
+    setSelected(name);
+  };
 
   return (
     <FluentWindProvider theme={theme} onThemeChange={setTheme}>
-      <div className="min-h-screen bg-neutral-background-1 p-spacing-xl transition-colors duration-normal">
-        <ThemeSwitcher />
-        <TokenShowcase />
+      <div className="min-h-screen bg-neutral-background-2 transition-colors duration-normal">
+        <Sidebar selected={selected} onSelect={handleSelect} />
+        <main className="ml-64 p-xl">
+          <Content selected={selected} />
+        </main>
       </div>
     </FluentWindProvider>
   );

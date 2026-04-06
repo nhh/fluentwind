@@ -12,14 +12,15 @@
     "@fluentwind/react": "workspace:*",
     "@fluentwind/tokens": "workspace:*",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "shiki": "^4.0.2"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "^4",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@vitejs/plugin-react": "^4",
     "tailwindcss": "^4",
-    "@tailwindcss/vite": "^4",
     "typescript": "^5",
     "vite": "^6"
   }
