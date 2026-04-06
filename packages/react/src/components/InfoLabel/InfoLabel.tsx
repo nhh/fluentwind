@@ -27,7 +27,7 @@ export const InfoLabel = forwardRef<HTMLLabelElement, InfoLabelProps>(
     }, [open]);
 
     return (
-      <div className="flex items-center gap-xxs w-fit">
+      <div className="flex items-center gap-xs w-fit">
         <Label ref={ref} className={className} {...props}>
           {children}
         </Label>
@@ -38,13 +38,17 @@ export const InfoLabel = forwardRef<HTMLLabelElement, InfoLabelProps>(
             aria-label="More information"
             onClick={() => setOpen((v) => !v)}
             className={cn(
-              'inline-flex items-center justify-center h-4 w-4 rounded-circular border border-neutral-stroke-accessible text-neutral-foreground-3 bg-transparent',
-              'hover:bg-subtle-background-hover transition-colors duration-fast',
+              'inline-flex items-center justify-center h-5 w-5 rounded-circular text-neutral-foreground-3 bg-transparent',
+              'hover:text-neutral-foreground-2 hover:bg-subtle-background-hover transition-colors duration-fast',
               'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-stroke-focus-2',
-              'text-[10px] leading-none font-semibold cursor-pointer',
+              'cursor-pointer',
             )}
           >
-            i
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.2" />
+              <path d="M8 7v4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              <circle cx="8" cy="4.75" r="0.75" fill="currentColor" />
+            </svg>
           </button>
           {open && (
             <div

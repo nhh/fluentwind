@@ -266,7 +266,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               disabled && 'opacity-50 cursor-not-allowed bg-neutral-background-disabled border-neutral-stroke-disabled',
             )}
           >
-            <CalendarIcon />
             <input
               ref={inputRef}
               type="text"
@@ -280,6 +279,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               aria-expanded={open}
               className="flex-1 bg-transparent outline-none text-neutral-foreground-1 placeholder:text-neutral-foreground-4 disabled:cursor-not-allowed min-w-0"
             />
+            <CalendarIcon />
           </span>
 
           {open && (

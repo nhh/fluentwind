@@ -192,9 +192,12 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(
 
               {showInput && (
                 <div className="mt-m flex items-center gap-xs">
-                  <span
-                    className="h-6 w-6 rounded-circular border border-neutral-stroke-1 shrink-0"
-                    style={{ backgroundColor: currentColor }}
+                  <input
+                    type="color"
+                    value={currentColor}
+                    onChange={(e) => handleColorChange(e.target.value)}
+                    className="h-7 w-7 rounded-medium border border-neutral-stroke-1 cursor-pointer shrink-0 p-0 appearance-none bg-transparent [&::-webkit-color-swatch-wrapper]:p-0 [&::-webkit-color-swatch]:rounded-small [&::-webkit-color-swatch]:border-none"
+                    aria-label="Pick custom color"
                   />
                   <input
                     type="text"

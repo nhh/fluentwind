@@ -3,8 +3,8 @@ import { cva } from 'class-variance-authority';
 import { cn } from '../../utils/cn';
 import type { SelectProps } from './Select.types';
 
-const selectVariants = cva(
-  'fw-input-underline appearance-none cursor-pointer bg-no-repeat bg-[right_8px_center] bg-[length:12px] pr-xl transition-colors duration-fast outline-none text-neutral-foreground-1',
+const wrapperVariants = cva(
+  'fw-input-underline relative inline-flex items-center w-full transition-colors duration-fast',
   {
     variants: {
       appearance: {
@@ -30,22 +30,30 @@ const selectVariants = cva(
   },
 );
 
+const ChevronDown = () => (
+  <svg className="shrink-0 text-neutral-foreground-3 pointer-events-none" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+    <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
   ({ appearance, size, disabled, className, ...props }, ref) => {
     return (
-      <select
-        ref={ref}
-        disabled={disabled}
+      <span
         className={cn(
-          selectVariants({ appearance, size }),
+          wrapperVariants({ appearance, size }),
           disabled && 'opacity-50 cursor-not-allowed bg-neutral-background-disabled',
           className,
         )}
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 4.5L6 8L9.5 4.5' stroke='%23616161' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")`,
-        }}
-        {...props}
-      />
+      >
+        <select
+          ref={ref}
+          disabled={disabled}
+          className="flex-1 appearance-none bg-transparent cursor-pointer outline-none text-neutral-foreground-1 disabled:cursor-not-allowed min-w-0"
+          {...props}
+        />
+        <ChevronDown />
+      </span>
     );
   },
 );

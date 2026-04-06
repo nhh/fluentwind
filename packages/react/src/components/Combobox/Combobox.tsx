@@ -100,7 +100,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             className="flex-1 bg-transparent outline-none text-neutral-foreground-1 placeholder:text-neutral-foreground-4 disabled:cursor-not-allowed min-w-0"
             {...props}
           />
-          <svg className="shrink-0 text-neutral-foreground-3" width="12" height="12" viewBox="0 0 12 12" fill="none">
+          <svg onClick={() => { if (!disabled) { setOpen((v) => !v); setQuery(''); } }} className="shrink-0 text-neutral-foreground-3 cursor-pointer" width="12" height="12" viewBox="0 0 12 12" fill="none">
             <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </span>

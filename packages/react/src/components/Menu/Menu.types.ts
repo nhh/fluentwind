@@ -25,3 +25,11 @@ export interface MenuItemProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export interface MenuDividerProps extends HTMLAttributes<HTMLDivElement> {}
+
+export interface MenuSubProps {
+  /** Label for the submenu trigger. */
+  label: ReactNode;
+  /** Icon displayed before the label. */
+  icon?: ReactNode;
+  children: ReactNode;
+}

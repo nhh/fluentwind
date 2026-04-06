@@ -11,7 +11,7 @@ const sizeClasses = {
 
 const colorClasses = {
   brand: 'text-brand-background',
-  marigold: 'text-status-warning-foreground-1',
+  marigold: 'text-palette-yellow-foreground-2',
   neutral: 'text-neutral-foreground-1',
 };
 

@@ -29,7 +29,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
             disabled={disabled}
             className={cn(
               'peer appearance-none cursor-pointer w-10 h-5 rounded-circular border border-neutral-stroke-accessible transition-colors duration-fast',
-              'bg-neutral-background-5',
+              'bg-transparent-background',
               'checked:bg-brand-background checked:border-brand-background',
               'hover:border-neutral-stroke-accessible-hover',
               'focus-visible:ring-2 focus-visible:ring-neutral-stroke-focus-2 focus-visible:ring-offset-1 focus-visible:ring-offset-neutral-stroke-focus-1',

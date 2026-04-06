@@ -81,6 +81,81 @@ function collectSelectedOptions(
   return result;
 }
 
+const ChevronDownSmall = () => (
+  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true" className="shrink-0 text-neutral-foreground-3 transition-transform duration-fast">
+    <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+function CascaderColumn({
+  options,
+  expandedPath,
+  selected,
+  focusColumn,
+  focusIndex,
+  onSelect,
+  depth,
+}: {
+  options: CascaderOption[];
+  expandedPath: string[];
+  selected: string[];
+  focusColumn: number;
+  focusIndex: number;
+  onSelect: (option: CascaderOption, columnIndex: number) => void;
+  depth: number;
+}) {
+  return (
+    <div role="listbox">
+      {options.map((option, optIndex) => {
+        const isExpanded = expandedPath[depth] === option.value;
+        const isSelectedLeaf =
+          selected.length > 0 &&
+          depth === selected.length - 1 &&
+          selected[depth] === option.value;
+        const isFocused = focusColumn === depth && focusIndex === optIndex;
+        const hasChildren = option.children && option.children.length > 0;
+
+        return (
+          <div key={option.value}>
+            <div
+              role="option"
+              aria-selected={isExpanded || isSelectedLeaf}
+              aria-disabled={option.disabled}
+              onClick={() => onSelect(option, depth)}
+              className={cn(
+                'flex items-center justify-between py-xs cursor-pointer transition-colors duration-fast text-300 leading-300',
+                'hover:bg-subtle-background-hover',
+                (isExpanded || isSelectedLeaf) && 'text-brand-foreground-1',
+                isFocused && 'bg-subtle-background-hover',
+                option.disabled && 'opacity-50 cursor-not-allowed',
+              )}
+              style={{ paddingLeft: `${12 + depth * 16}px`, paddingRight: '12px' }}
+            >
+              <span className="truncate">{option.label}</span>
+              {hasChildren && (
+                <span className={cn('transition-transform duration-fast', isExpanded && 'rotate-180')}>
+                  <ChevronDownSmall />
+                </span>
+              )}
+            </div>
+            {hasChildren && isExpanded && (
+              <CascaderColumn
+                options={option.children!}
+                expandedPath={expandedPath}
+                selected={selected}
+                focusColumn={focusColumn}
+                focusIndex={focusIndex}
+                onSelect={onSelect}
+                depth={depth + 1}
+              />
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 export const Cascader = forwardRef<HTMLDivElement, CascaderProps>(
   (
     {
@@ -259,46 +334,16 @@ export const Cascader = forwardRef<HTMLDivElement, CascaderProps>(
           </button>
 
           {open && (
-            <div className="absolute z-50 mt-xxs flex bg-neutral-background-1 border border-neutral-stroke-1 rounded-medium shadow-16 overflow-hidden">
-              {columns.map((col, colIndex) => (
-                <div
-                  key={colIndex}
-                  role="listbox"
-                  className={cn(
-                    'w-[180px] max-h-60 overflow-y-auto py-xs',
-                    colIndex < columns.length - 1 && 'border-r border-neutral-stroke-1',
-                  )}
-                >
-                  {col.options.map((option, optIndex) => {
-                    const isExpanded = col.selectedValue === option.value;
-                    const isSelectedLeaf =
-                      selected.length > 0 &&
-                      colIndex === selected.length - 1 &&
-                      selected[colIndex] === option.value;
-                    const isFocused = focusColumn === colIndex && focusIndex === optIndex;
-
-                    return (
-                      <div
-                        key={option.value}
-                        role="option"
-                        aria-selected={isExpanded || isSelectedLeaf}
-                        aria-disabled={option.disabled}
-                        onClick={() => handleSelectOption(option, colIndex)}
-                        className={cn(
-                          'flex items-center justify-between px-m py-xs cursor-pointer transition-colors duration-fast text-300 leading-300',
-                          'hover:bg-subtle-background-hover',
-                          (isExpanded || isSelectedLeaf) && 'text-brand-foreground-1',
-                          isFocused && 'bg-subtle-background-hover',
-                          option.disabled && 'opacity-50 cursor-not-allowed',
-                        )}
-                      >
-                        <span className="truncate">{option.label}</span>
-                        {option.children && option.children.length > 0 && <ChevronRightSmall />}
-                      </div>
-                    );
-                  })}
-                </div>
-              ))}
+            <div className="absolute z-50 mt-xxs w-full min-w-[200px] bg-neutral-background-1 border border-neutral-stroke-1 rounded-medium shadow-16 overflow-hidden max-h-80 overflow-y-auto py-xs">
+              <CascaderColumn
+                options={options}
+                expandedPath={expandedPath}
+                selected={selected}
+                focusColumn={focusColumn}
+                focusIndex={focusIndex}
+                onSelect={handleSelectOption}
+                depth={0}
+              />
             </div>
           )}
         </div>

@@ -64,7 +64,7 @@ export const HoverCard = forwardRef<HTMLDivElement, HoverCardProps>(
             onMouseEnter={handleCardEnter}
             onMouseLeave={handleCardLeave}
             className={cn(
-              'absolute z-50 bg-neutral-background-1 text-neutral-foreground-1 shadow-16 rounded-medium border border-neutral-stroke-2 p-m animate-[fw-fade-slide-in_150ms_var(--ease-decelerate-mid)]',
+              'absolute z-50 bg-neutral-background-1 text-neutral-foreground-1 shadow-16 rounded-medium border border-neutral-stroke-2 p-l min-w-[280px] animate-[fw-fade-slide-in_150ms_var(--ease-decelerate-mid)]',
               positionStyles[position],
             )}
           >

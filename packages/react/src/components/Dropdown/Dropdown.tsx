@@ -63,6 +63,10 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
     },
     ref,
   ) => {
+    const isControlled = value !== undefined;
+    const [internalValue, setInternalValue] = useState<string | undefined>(undefined);
+    const selected = isControlled ? value : internalValue;
+
     const [open, setOpen] = useState(false);
     const [focusedIndex, setFocusedIndex] = useState(-1);
     const containerRef = useRef<HTMLDivElement>(null);
@@ -70,16 +74,17 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
     const listboxRef = useRef<HTMLDivElement>(null);
     const listboxId = useId();
 
-    const selectedOption = options.find((o) => o.value === value);
+    const selectedOption = options.find((o) => o.value === selected);
 
     const handleSelect = useCallback(
       (optionValue: string) => {
+        if (!isControlled) setInternalValue(optionValue);
         onChange?.(optionValue);
         setOpen(false);
         setFocusedIndex(-1);
         triggerBtnRef.current?.focus();
       },
-      [onChange],
+      [isControlled, onChange],
     );
 
     const handleTriggerKeyDown = useCallback(
@@ -181,13 +186,13 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
                 key={option.value}
                 type="button"
                 role="option"
-                aria-selected={option.value === value}
+                aria-selected={option.value === selected}
                 disabled={option.disabled}
                 className={cn(
                   'flex items-center w-full text-left px-m py-s text-300 leading-300 transition-colors duration-fast cursor-pointer outline-none',
                   'hover:bg-subtle-background-hover focus-visible:bg-subtle-background-hover',
                   'active:bg-subtle-background-pressed',
-                  option.value === value && 'bg-subtle-background-selected',
+                  option.value === selected && 'bg-subtle-background-selected',
                   option.disabled && 'opacity-50 cursor-not-allowed',
                 )}
                 onClick={() => !option.disabled && handleSelect(option.value)}

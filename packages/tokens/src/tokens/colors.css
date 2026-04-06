@@ -10,7 +10,7 @@
   --color-neutral-foreground-4: var(--fw-neutral-foreground-4);
   --color-neutral-foreground-disabled: var(--fw-neutral-foreground-disabled);
   --color-neutral-foreground-inverted: var(--fw-neutral-foreground-inverted);
-  --color-neutral-foreground-on-brand: var(--fw-neutral-foreground-on-brand);
+  --color-neutral-foreground-on-brand: var(--fw-neutral-foreground-on-brand, #ffffff);
 
   /* --- Neutral Background --- */
   --color-neutral-background-1: var(--fw-neutral-background-1);

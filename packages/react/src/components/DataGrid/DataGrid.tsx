@@ -172,7 +172,7 @@ export const DataGrid = forwardRef<HTMLDivElement, DataGridProps>(
         onKeyDown={keyboard.handleKeyDown}
         className={cn(
           'relative border border-neutral-stroke-2 rounded-medium bg-neutral-background-1 text-neutral-foreground-1 outline-none',
-          'focus-visible:ring-2 focus-visible:ring-neutral-stroke-focus-2 focus-visible:ring-offset-1 focus-visible:ring-offset-neutral-stroke-focus-1',
+          'focus-visible:outline-none',
           selection.isDragging && 'select-none',
           className,
         )}

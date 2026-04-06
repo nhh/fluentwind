@@ -15,6 +15,7 @@ import type {
   MenuPopoverProps,
   MenuItemProps,
   MenuDividerProps,
+  MenuSubProps,
 } from './Menu.types';
 
 interface MenuContextValue {
@@ -209,3 +210,57 @@ export const MenuDivider = forwardRef<HTMLDivElement, MenuDividerProps>(
 );
 
 MenuDivider.displayName = 'MenuDivider';
+
+const ChevronRight = () => (
+  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true" className="shrink-0 text-neutral-foreground-3">
+    <path d="M4.5 2.5L8 6L4.5 9.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+export const MenuSub = ({ label, icon, children }: MenuSubProps) => {
+  const [subOpen, setSubOpen] = useState(false);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
+
+  const handleEnter = () => {
+    clearTimeout(timeoutRef.current);
+    setSubOpen(true);
+  };
+
+  const handleLeave = () => {
+    timeoutRef.current = setTimeout(() => setSubOpen(false), 150);
+  };
+
+  return (
+    <div
+      className="relative"
+      onMouseEnter={handleEnter}
+      onMouseLeave={handleLeave}
+    >
+      <button
+        type="button"
+        role="menuitem"
+        aria-haspopup="menu"
+        aria-expanded={subOpen}
+        className={cn(
+          'flex items-center w-full text-left px-m py-s gap-s text-300 leading-300 transition-colors duration-fast cursor-pointer outline-none',
+          'hover:bg-subtle-background-hover focus-visible:bg-subtle-background-hover',
+        )}
+        onClick={() => setSubOpen(!subOpen)}
+      >
+        {icon && <span className="shrink-0">{icon}</span>}
+        <span className="flex-1">{label}</span>
+        <ChevronRight />
+      </button>
+      {subOpen && (
+        <div
+          role="menu"
+          className="absolute left-full top-0 z-50 ml-xxs min-w-[160px] bg-neutral-background-1 text-neutral-foreground-1 rounded-medium shadow-16 border border-neutral-stroke-1 py-xs animate-[fw-fade-slide-in_100ms_var(--ease-decelerate-mid)]"
+        >
+          {children}
+        </div>
+      )}
+    </div>
+  );
+};
+
+MenuSub.displayName = 'MenuSub';

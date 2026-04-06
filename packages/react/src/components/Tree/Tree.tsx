@@ -75,7 +75,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
         <div
           ref={ref}
           role="tree"
-          className={cn(isNested ? 'pl-l' : '', className)}
+          className={cn(isNested ? 'pl-xxl' : '', className)}
           {...props}
         >
           {children}

@@ -96,9 +96,9 @@ export const Tablist = forwardRef<HTMLDivElement, TablistProps>(
 Tablist.displayName = 'Tablist';
 
 const sizeStyles: Record<string, string> = {
-  small: 'text-200 leading-200 px-s py-xxs gap-xs',
-  medium: 'text-300 leading-300 px-m py-xs gap-xs',
-  large: 'text-400 leading-400 px-m py-s gap-s',
+  small: 'text-200 leading-200 px-s py-s gap-xs',
+  medium: 'text-300 leading-300 px-m py-m gap-xs',
+  large: 'text-400 leading-400 px-m py-l gap-s',
 };
 
 export const Tab = forwardRef<HTMLButtonElement, TabProps>(

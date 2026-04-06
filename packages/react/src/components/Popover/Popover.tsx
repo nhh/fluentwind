@@ -76,7 +76,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
             id={popoverId}
             role="dialog"
             className={cn(
-              'absolute z-50 bg-neutral-background-1 text-neutral-foreground-1 rounded-medium shadow-16 p-m border border-neutral-stroke-1 animate-[fw-fade-slide-in_150ms_var(--ease-decelerate-mid)]',
+              'absolute z-50 bg-neutral-background-1 text-neutral-foreground-1 rounded-medium shadow-16 p-l border border-neutral-stroke-1 min-w-[200px] animate-[fw-fade-slide-in_150ms_var(--ease-decelerate-mid)]',
               positionStyles[positioning],
             )}
           >

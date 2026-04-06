@@ -62,7 +62,7 @@ export const Dialog = ({
     <DialogContext.Provider value={{ titleId }}>
       <dialog
         ref={dialogRef}
-        className="backdrop:bg-black/40 bg-transparent p-0 m-auto open:flex open:animate-[fw-fade-scale-in_250ms_var(--ease-decelerate-mid)]"
+        className="backdrop:bg-black/40 backdrop:animate-[fw-fade-in_200ms_ease-out] bg-transparent p-0 m-auto open:flex open:animate-[fw-fade-scale-in_250ms_var(--ease-decelerate-mid)]"
         aria-modal={modalType === 'modal' || modalType === 'alert' ? true : undefined}
         aria-labelledby={titleId}
         role={modalType === 'alert' ? 'alertdialog' : undefined}

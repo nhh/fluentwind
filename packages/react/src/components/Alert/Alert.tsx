@@ -59,7 +59,7 @@ const intentConfig: Record<AlertIntent, { primary: string; inverted: string; ico
 // --- Alert variants ---
 
 const alertVariants = cva(
-  'flex items-start gap-s border-l-4 px-m py-s rounded-medium text-300 leading-300',
+  'flex items-start gap-s px-m py-m rounded-medium text-300 leading-300',
   {
     variants: {
       appearance: {

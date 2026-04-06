@@ -118,8 +118,9 @@ function TreeNodeRenderer({
           if (node.disabled) return;
           if (hasChildren) {
             onToggleExpand(node.key);
+          } else {
+            onSelect(node.key);
           }
-          onSelect(node.key);
         }}
       >
         {hasChildren ? (

@@ -38,7 +38,7 @@
      --border-*   → border-* (width)
    ========================================================================== */
 
-@theme {
+@theme inline {
   /* ===== COLORS ===== */
 
   /* Neutral Foreground */
@@ -48,7 +48,7 @@
   --color-neutral-foreground-4: var(--fw-neutral-foreground-4);
   --color-neutral-foreground-disabled: var(--fw-neutral-foreground-disabled);
   --color-neutral-foreground-inverted: var(--fw-neutral-foreground-inverted);
-  --color-neutral-foreground-on-brand: var(--fw-neutral-foreground-on-brand);
+  --color-neutral-foreground-on-brand: var(--fw-neutral-foreground-on-brand, #ffffff);
 
   /* Neutral Background */
   --color-neutral-background-1: var(--fw-neutral-background-1);
@@ -331,6 +331,11 @@
 }
 
 /* Dialog / large surfaces enter: fade + scale up */
+@keyframes fw-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
 @keyframes fw-fade-scale-in {
   from { opacity: 0; transform: scale(0.95); }
   to   { opacity: 1; transform: scale(1); }

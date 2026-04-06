@@ -65,7 +65,7 @@ export const Tooltip = ({
           id={tooltipId}
           role="tooltip"
           className={cn(
-            'absolute z-50 rounded-medium shadow-4 px-s py-xs text-200 leading-200 whitespace-nowrap pointer-events-none animate-[fw-fade-slide-in_100ms_var(--ease-decelerate-mid)]',
+            'absolute z-50 rounded-small shadow-4 px-xs py-xxs text-100 leading-100 whitespace-nowrap pointer-events-none animate-[fw-fade-slide-in_100ms_var(--ease-decelerate-mid)]',
             appearanceStyles[appearance],
             positionStyles[positioning],
           )}
