@@ -1,0 +1,32 @@
+@import 'tailwindcss';
+@import '@fluentwind/tokens/preset.css' theme(static);
+
+@source "../../../packages/react/src";
+
+*:focus,
+*:focus-visible {
+  outline: none !important;
+}
+
+.fw-input-underline {
+  position: relative;
+}
+.fw-input-underline::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  border-radius: 0 0 4px 4px;
+  background: var(--color-brand-stroke-1);
+  transform: scaleX(0);
+  transition: transform 150ms ease;
+  transform-origin: center;
+}
+.fw-input-underline:focus-within::after {
+  transform: scaleX(1);
+}
+.fw-input-underline:focus-within {
+  box-shadow: none !important;
+}
