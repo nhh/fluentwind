@@ -62,6 +62,10 @@ export const SpinButton = forwardRef<HTMLInputElement, SpinButtonProps>(
           ref={ref}
           type="text"
           inputMode="numeric"
+          role="spinbutton"
+          aria-valuenow={value}
+          aria-valuemin={min !== -Infinity ? min : undefined}
+          aria-valuemax={max !== Infinity ? max : undefined}
           disabled={disabled}
           value={value}
           onChange={(e) => {

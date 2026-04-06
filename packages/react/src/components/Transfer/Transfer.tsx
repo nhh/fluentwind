@@ -132,7 +132,7 @@ function TransferPanel({
       )}
 
       {/* Items */}
-      <div className="flex-1 overflow-y-auto h-60 py-xs">
+      <div className="flex-1 overflow-y-auto h-60 py-xs" role="listbox" aria-label={typeof title === 'string' ? title : undefined}>
         {filteredItems.length === 0 ? (
           <div className="flex items-center justify-center h-full text-200 text-neutral-foreground-4">
             No items
@@ -141,6 +141,8 @@ function TransferPanel({
           filteredItems.map((item) => (
             <label
               key={item.key}
+              role="option"
+              aria-selected={checkedKeys.has(item.key)}
               className={cn(
                 'flex items-center gap-xs px-m py-xxs cursor-pointer transition-colors duration-fast',
                 'hover:bg-subtle-background-hover',

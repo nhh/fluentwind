@@ -46,7 +46,7 @@ export const NavItem = forwardRef<HTMLElement, NavItemProps>(
       'active:bg-subtle-background-pressed',
       sizeStyles[size],
       selected &&
-        'text-brand-foreground-1 bg-brand-background-2 before:absolute before:left-0 before:top-1 before:bottom-1 before:w-[2px] before:bg-brand-stroke-1 before:rounded-full',
+        'text-brand-foreground-1 bg-brand-background-2 before:absolute before:left-0 before:top-1 before:bottom-1 before:w-[2px] before:bg-brand-stroke-1 before:rounded-circular',
       className,
     );
 

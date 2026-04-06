@@ -67,11 +67,12 @@ const messageBarVariants = cva(
 export const MessageBar = forwardRef<HTMLDivElement, MessageBarProps>(
   ({ intent = 'info', shape, layout, className, children, ...props }, ref) => {
     const intentConfig = intentStyles[intent];
+    const role = intent === 'error' ? 'alert' : 'status';
 
     return (
       <div
         ref={ref}
-        role="status"
+        role={role}
         className={cn(messageBarVariants({ shape, layout }), intentConfig.border, className)}
         {...props}
       >

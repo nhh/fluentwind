@@ -10,10 +10,10 @@ const badgeVariants = cva(
       size: {
         tiny: 'h-1.5 w-1.5 text-[0px]',
         extraSmall: 'h-3 w-3 text-[0px]',
-        small: 'h-4 min-w-4 px-1 text-100 leading-100',
-        medium: 'h-5 min-w-5 px-1.5 text-200 leading-200',
-        large: 'h-6 min-w-6 px-1.5 text-200 leading-200',
-        extraLarge: 'h-8 min-w-8 px-2 text-300 leading-300',
+        small: 'h-4 min-w-4 px-xs text-100 leading-100',
+        medium: 'h-5 min-w-5 px-s-nudge text-200 leading-200',
+        large: 'h-6 min-w-6 px-s-nudge text-200 leading-200',
+        extraLarge: 'h-8 min-w-8 px-s text-300 leading-300',
       },
       shape: {
         rounded: 'rounded-medium',

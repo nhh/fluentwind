@@ -8,6 +8,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>(
       <input
         ref={ref}
         type="range"
+        aria-orientation={vertical ? 'vertical' : 'horizontal'}
         disabled={disabled}
         className={cn(
           'appearance-none bg-transparent cursor-pointer outline-none',

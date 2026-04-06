@@ -292,7 +292,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 >
                   <ChevronLeft />
                 </button>
-                <span className="text-300 leading-300 font-semibold text-neutral-foreground-1">
+                <span aria-live="polite" className="text-300 leading-300 font-semibold text-neutral-foreground-1">
                   {MONTHS[viewDate.getMonth()]} {viewDate.getFullYear()}
                 </span>
                 <button

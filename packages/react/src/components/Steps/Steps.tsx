@@ -30,7 +30,7 @@ const containerVariants = cva('flex', {
 });
 
 const indicatorVariants = cva(
-  'shrink-0 flex items-center justify-center rounded-full border-2 font-semibold transition-colors duration-fast',
+  'shrink-0 flex items-center justify-center rounded-circular border-2 font-semibold transition-colors duration-fast',
   {
     variants: {
       size: {
@@ -237,7 +237,7 @@ export const StepItem = forwardRef<HTMLDivElement, StepItemProps>(
           </div>
         </div>
         {!isLast && (
-          <div className={cn('flex-1 h-0.5 mt-4 self-start', lineClasses)} />
+          <div className={cn('flex-1 h-0.5 mt-l self-start', lineClasses)} />
         )}
       </div>
     );

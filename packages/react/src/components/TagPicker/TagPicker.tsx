@@ -1,4 +1,4 @@
-import { forwardRef, useState, useRef, useEffect, useCallback, useMemo } from 'react';
+import { forwardRef, useState, useRef, useEffect, useCallback, useMemo, useId } from 'react';
 import { cn } from '../../utils/cn';
 import type { TagPickerProps } from './TagPicker.types';
 
@@ -22,8 +22,10 @@ export const TagPicker = forwardRef<HTMLDivElement, TagPickerProps>(
 
     const [isOpen, setIsOpen] = useState(false);
     const [search, setSearch] = useState('');
+    const [highlightedIndex, setHighlightedIndex] = useState(-1);
     const containerRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
+    const listboxId = useId();
 
     const updateValues = useCallback(
       (next: string[]) => {
@@ -124,12 +126,17 @@ export const TagPicker = forwardRef<HTMLDivElement, TagPickerProps>(
           <input
             ref={inputRef}
             type="text"
+            role="combobox"
+            aria-expanded={isOpen && filteredOptions.length > 0}
+            aria-controls={isOpen && filteredOptions.length > 0 ? listboxId : undefined}
+            aria-activedescendant={highlightedIndex >= 0 ? `${listboxId}-option-${highlightedIndex}` : undefined}
             value={search}
             disabled={disabled}
             placeholder={selectedValues.length === 0 ? placeholder : ''}
             onChange={(e) => {
               setSearch(e.target.value);
               setIsOpen(true);
+              setHighlightedIndex(-1);
             }}
             onFocus={() => !disabled && setIsOpen(true)}
             onKeyDown={(e) => {
@@ -138,20 +145,38 @@ export const TagPicker = forwardRef<HTMLDivElement, TagPickerProps>(
               }
               if (e.key === 'Escape') {
                 setIsOpen(false);
+                setHighlightedIndex(-1);
+              }
+              if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                setHighlightedIndex((prev) => Math.min(prev + 1, filteredOptions.length - 1));
+              }
+              if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                setHighlightedIndex((prev) => Math.max(prev - 1, 0));
+              }
+              if (e.key === 'Enter' && highlightedIndex >= 0 && highlightedIndex < filteredOptions.length) {
+                e.preventDefault();
+                add(filteredOptions[highlightedIndex].value);
+                setHighlightedIndex(-1);
               }
             }}
             className="flex-1 min-w-[80px] bg-transparent border-none outline-none text-300 leading-300 text-neutral-foreground-1 placeholder:text-neutral-foreground-4"
           />
         </div>
         {isOpen && filteredOptions.length > 0 && (
-          <div className="absolute z-50 mt-xxs w-full max-h-60 overflow-auto rounded-medium border border-neutral-stroke-1 bg-neutral-background-1 shadow-16 py-xxs">
-            {filteredOptions.map((option) => (
+          <div id={listboxId} role="listbox" className="absolute z-50 mt-xxs w-full max-h-60 overflow-auto rounded-medium border border-neutral-stroke-1 bg-neutral-background-1 shadow-16 py-xxs">
+            {filteredOptions.map((option, index) => (
               <button
                 key={option.value}
+                id={`${listboxId}-option-${index}`}
                 type="button"
+                role="option"
+                aria-selected={selectedValues.includes(option.value)}
                 className={cn(
                   'w-full text-start px-m py-xs text-300 leading-300 text-neutral-foreground-1 cursor-pointer transition-colors duration-fast',
                   'hover:bg-subtle-background-hover active:bg-subtle-background-pressed',
+                  index === highlightedIndex && 'bg-subtle-background-hover',
                 )}
                 onClick={() => add(option.value)}
               >

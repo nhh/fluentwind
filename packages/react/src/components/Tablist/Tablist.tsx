@@ -122,10 +122,10 @@ export const Tab = forwardRef<HTMLButtonElement, TabProps>(
           isSelected && 'text-brand-foreground-1',
           !vertical &&
             isSelected &&
-            'after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-brand-stroke-1 after:rounded-full',
+            'after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-brand-stroke-1 after:rounded-circular',
           vertical &&
             isSelected &&
-            'after:absolute after:left-0 after:top-0 after:bottom-0 after:w-[2px] after:bg-brand-stroke-1 after:rounded-full',
+            'after:absolute after:left-0 after:top-0 after:bottom-0 after:w-[2px] after:bg-brand-stroke-1 after:rounded-circular',
           disabled && 'opacity-50 cursor-not-allowed',
           className,
         )}

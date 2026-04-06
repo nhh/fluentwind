@@ -114,7 +114,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
             aria-label="Close"
             onClick={onClose}
             className={cn(
-              'shrink-0 p-1 rounded-medium transition-colors duration-fast',
+              'shrink-0 p-xxs rounded-medium transition-colors duration-fast cursor-pointer outline-none',
               appearance === 'inverted'
                 ? 'hover:bg-white/20'
                 : 'hover:bg-subtle-background-hover',

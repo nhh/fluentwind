@@ -25,6 +25,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
             id={id}
             type="checkbox"
             role="switch"
+            aria-checked={props.checked ?? undefined}
             disabled={disabled}
             className={cn(
               'peer appearance-none cursor-pointer w-10 h-5 rounded-circular border border-neutral-stroke-accessible transition-colors duration-fast',

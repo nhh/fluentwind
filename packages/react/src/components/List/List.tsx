@@ -1,18 +1,22 @@
-import { forwardRef } from 'react';
+import { forwardRef, createContext, useContext } from 'react';
 import { cn } from '../../utils/cn';
 import type { ListProps, ListItemProps } from './List.types';
+
+const ListContext = createContext<{ navigable: boolean }>({ navigable: false });
 
 export const List = forwardRef<HTMLUListElement, ListProps>(
   ({ navigable, className, children, ...props }, ref) => {
     return (
-      <ul
-        ref={ref}
-        role={navigable ? 'listbox' : 'list'}
-        className={cn('list-none m-0 p-0', className)}
-        {...props}
-      >
-        {children}
-      </ul>
+      <ListContext.Provider value={{ navigable: !!navigable }}>
+        <ul
+          ref={ref}
+          role={navigable ? 'listbox' : 'list'}
+          className={cn('list-none m-0 p-0', className)}
+          {...props}
+        >
+          {children}
+        </ul>
+      </ListContext.Provider>
     );
   },
 );
@@ -21,10 +25,12 @@ List.displayName = 'List';
 
 export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
   ({ secondaryText, media, action, selected, className, children, ...props }, ref) => {
+    const { navigable } = useContext(ListContext);
+
     return (
       <li
         ref={ref}
-        role="listitem"
+        role={navigable ? 'option' : 'listitem'}
         aria-selected={selected ?? undefined}
         className={cn(
           'flex items-center gap-m px-m py-s text-neutral-foreground-1 cursor-default transition-colors duration-fast',

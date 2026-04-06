@@ -1,6 +1,7 @@
-import { forwardRef, useEffect, useCallback } from 'react';
+import { forwardRef, useEffect, useCallback, useId, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { cn } from '../../utils/cn';
+import { useFocusTrap } from '../../hooks/useFocusTrap';
 import type { DrawerProps } from './Drawer.types';
 
 const sizeClasses = {
@@ -45,10 +46,16 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
       type = 'overlay',
       className,
       children,
+      'aria-label': ariaLabel,
       ...props
     },
     ref,
   ) => {
+    const labelId = useId();
+    const internalRef = useRef<HTMLDivElement>(null);
+    const panelRef = (ref as React.RefObject<HTMLDivElement>) ?? internalRef;
+
+    useFocusTrap(panelRef, !!open);
     // Lock body scroll when overlay is open
     useEffect(() => {
       if (type === 'overlay' && open) {
@@ -74,9 +81,11 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
 
     const drawerContent = (
       <div
-        ref={ref}
+        ref={panelRef}
         role={type === 'overlay' ? 'dialog' : undefined}
         aria-modal={type === 'overlay' ? true : undefined}
+        aria-label={ariaLabel ?? 'Drawer'}
+        data-drawer-label-id={labelId}
         onKeyDown={handleKeyDown}
         className={cn(
           'bg-neutral-background-1 text-neutral-foreground-1 border-neutral-stroke-1 flex flex-col overflow-auto transition-transform duration-normal ease-easy-max',

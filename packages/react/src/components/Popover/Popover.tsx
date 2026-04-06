@@ -1,4 +1,4 @@
-import { forwardRef, useState, useRef, useEffect, useCallback } from 'react';
+import { forwardRef, useState, useRef, useEffect, useCallback, useId } from 'react';
 import { cn } from '../../utils/cn';
 import type { PopoverProps } from './Popover.types';
 
@@ -25,6 +25,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     const [internalOpen, setInternalOpen] = useState(false);
     const isOpen = controlledOpen !== undefined ? controlledOpen : internalOpen;
     const containerRef = useRef<HTMLDivElement>(null);
+    const popoverId = useId();
 
     const setOpen = useCallback(
       (value: boolean) => {
@@ -68,10 +69,12 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         onKeyDown={handleKeyDown}
         {...props}
       >
-        <div onClick={handleTriggerClick} aria-expanded={isOpen}>{trigger}</div>
+        <div onClick={handleTriggerClick} aria-expanded={isOpen} aria-haspopup="dialog" aria-controls={isOpen ? popoverId : undefined}>{trigger}</div>
         {isOpen && (
           <div
             ref={ref}
+            id={popoverId}
+            role="dialog"
             className={cn(
               'absolute z-50 bg-neutral-background-1 text-neutral-foreground-1 rounded-medium shadow-16 p-m border border-neutral-stroke-1 animate-[fw-fade-slide-in_150ms_var(--ease-decelerate-mid)]',
               positionStyles[positioning],

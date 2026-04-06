@@ -25,7 +25,7 @@ export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(
         role="group"
         className={cn(
           'inline-flex items-center',
-          layout === 'stack' && '-space-x-2',
+          layout === 'stack' && '-space-x-s',
           layout === 'spread' && 'gap-xs',
           className,
         )}

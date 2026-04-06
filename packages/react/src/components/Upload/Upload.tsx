@@ -267,7 +267,13 @@ export const Upload = forwardRef<HTMLDivElement, UploadProps>(
               <RemoveIcon />
             </button>
             {file.status === 'uploading' && (
-              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-neutral-background-3 rounded-full overflow-hidden">
+              <div
+                className="absolute bottom-0 left-0 right-0 h-0.5 bg-neutral-background-3 rounded-circular overflow-hidden"
+                role="progressbar"
+                aria-valuenow={file.progress ?? 0}
+                aria-valuemin={0}
+                aria-valuemax={100}
+              >
                 <div
                   className="h-full bg-brand-background transition-all duration-normal"
                   style={{ width: `${file.progress ?? 0}%` }}
@@ -329,6 +335,7 @@ export const Upload = forwardRef<HTMLDivElement, UploadProps>(
                 handleTriggerClick();
               }
             }}
+            aria-label="Upload files by dragging or clicking"
             className={cn(draggerVariants({ isDragOver, disabled }))}
           >
             {children ?? (

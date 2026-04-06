@@ -1,5 +1,6 @@
-import { forwardRef, useEffect, useRef, useCallback, type ReactNode } from 'react';
+import { forwardRef, useEffect, useRef, useCallback, useId, useContext, createContext, type ReactNode } from 'react';
 import { cn } from '../../utils/cn';
+import { useFocusTrap } from '../../hooks/useFocusTrap';
 import type {
   DialogProps,
   DialogSurfaceProps,
@@ -8,6 +9,8 @@ import type {
   DialogActionsProps,
 } from './Dialog.types';
 
+const DialogContext = createContext<{ titleId: string }>({ titleId: '' });
+
 export const Dialog = ({
   open,
   onOpenChange,
@@ -15,6 +18,9 @@ export const Dialog = ({
   children,
 }: DialogProps) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const titleId = useId();
+
+  useFocusTrap(dialogRef, !!open);
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -53,16 +59,19 @@ export const Dialog = ({
   );
 
   return (
-    <dialog
-      ref={dialogRef}
-      className="backdrop:bg-black/40 bg-transparent p-0 m-auto open:flex open:animate-[fw-fade-scale-in_250ms_var(--ease-decelerate-mid)]"
-      aria-modal={modalType === 'modal' || modalType === 'alert' ? true : undefined}
-      role={modalType === 'alert' ? 'alertdialog' : undefined}
-      onCancel={handleCancel}
-      onClick={handleBackdropClick}
-    >
-      {children}
-    </dialog>
+    <DialogContext.Provider value={{ titleId }}>
+      <dialog
+        ref={dialogRef}
+        className="backdrop:bg-black/40 bg-transparent p-0 m-auto open:flex open:animate-[fw-fade-scale-in_250ms_var(--ease-decelerate-mid)]"
+        aria-modal={modalType === 'modal' || modalType === 'alert' ? true : undefined}
+        aria-labelledby={titleId}
+        role={modalType === 'alert' ? 'alertdialog' : undefined}
+        onCancel={handleCancel}
+        onClick={handleBackdropClick}
+      >
+        {children}
+      </dialog>
+    </DialogContext.Provider>
   );
 };
 
@@ -89,9 +98,11 @@ DialogSurface.displayName = 'DialogSurface';
 
 export const DialogTitle = forwardRef<HTMLHeadingElement, DialogTitleProps>(
   ({ className, children, ...props }, ref) => {
+    const { titleId } = useContext(DialogContext);
     return (
       <h2
         ref={ref}
+        id={titleId}
         className={cn(
           'text-500 leading-500 font-semibold text-neutral-foreground-1',
           className,

@@ -47,6 +47,7 @@ export const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
         <div
           ref={ref}
           role="radiogroup"
+          aria-orientation={layout === 'horizontal' ? 'horizontal' : 'vertical'}
           className={cn(
             'flex gap-s',
             layout === 'vertical' ? 'flex-col' : 'flex-row flex-wrap',

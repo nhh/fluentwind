@@ -84,6 +84,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             role="combobox"
             aria-expanded={open}
             aria-controls={listboxId}
+            aria-autocomplete="list"
             aria-activedescendant={activeIndex >= 0 ? `${listboxId}-${activeIndex}` : undefined}
             disabled={disabled}
             placeholder={placeholder}

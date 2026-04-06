@@ -35,6 +35,7 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
           aria-valuenow={isIndeterminate ? undefined : value}
           aria-valuemin={0}
           aria-valuemax={max}
+          aria-busy={isIndeterminate ? "true" : undefined}
           className={cn('w-full overflow-hidden', h, r, 'bg-neutral-stroke-1', className)}
           {...props}
         >

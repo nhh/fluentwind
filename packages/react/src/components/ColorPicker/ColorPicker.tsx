@@ -164,6 +164,7 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(
           {open && (
             <div
               role="dialog"
+              aria-modal="true"
               aria-label="Color picker"
               className="absolute top-full left-0 z-50 mt-xxs bg-neutral-background-1 rounded-medium shadow-8 border border-neutral-stroke-1 p-m"
             >

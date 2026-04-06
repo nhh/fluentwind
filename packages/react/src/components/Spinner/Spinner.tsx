@@ -54,6 +54,7 @@ export const Spinner = forwardRef<HTMLElement, SpinnerProps>(
       <span
         ref={ref as React.Ref<HTMLSpanElement>}
         role="progressbar"
+        aria-busy="true"
         aria-label={label || 'Loading'}
         className={cn('inline-flex', layoutClasses[labelPosition], className)}
         {...props}

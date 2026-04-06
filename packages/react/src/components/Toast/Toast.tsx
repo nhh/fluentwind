@@ -139,7 +139,7 @@ function ToastItem({
         type="button"
         aria-label="Dismiss"
         onClick={handleDismiss}
-        className="shrink-0 p-1 rounded-medium hover:bg-subtle-background-hover transition-colors duration-fast cursor-pointer"
+        className="shrink-0 p-xxs rounded-medium hover:bg-subtle-background-hover focus-visible:ring-2 focus-visible:ring-neutral-stroke-focus-2 transition-colors duration-fast cursor-pointer outline-none"
       >
         <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
           <path d="M4.09 4.22a.75.75 0 0 1 1.06-.04L10 8.94l4.85-4.76a.75.75 0 1 1 1.06 1.06L11.06 10l4.85 4.76a.75.75 0 1 1-1.06 1.06L10 11.06l-4.85 4.76a.75.75 0 0 1-1.06-1.06L8.94 10 4.09 5.24a.75.75 0 0 1-.04-1.06l.04.04Z" />

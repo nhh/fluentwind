@@ -1,4 +1,4 @@
-import { forwardRef, useState, useRef, useEffect, useCallback } from 'react';
+import { forwardRef, useState, useRef, useEffect, useCallback, useId } from 'react';
 import { cn } from '../../utils/cn';
 import type { PopconfirmProps } from './Popconfirm.types';
 
@@ -47,6 +47,7 @@ export const Popconfirm = forwardRef<HTMLDivElement, PopconfirmProps>(
     const [internalOpen, setInternalOpen] = useState(defaultOpen);
     const isOpen = controlledOpen !== undefined ? controlledOpen : internalOpen;
     const containerRef = useRef<HTMLDivElement>(null);
+    const descId = useId();
 
     const setOpen = useCallback(
       (value: boolean) => {
@@ -100,7 +101,7 @@ export const Popconfirm = forwardRef<HTMLDivElement, PopconfirmProps>(
         onKeyDown={handleKeyDown}
         {...props}
       >
-        <div onClick={handleTriggerClick} aria-expanded={isOpen}>
+        <div onClick={handleTriggerClick} aria-expanded={isOpen} aria-haspopup="dialog">
           {children}
         </div>
         {isOpen && (
@@ -108,6 +109,7 @@ export const Popconfirm = forwardRef<HTMLDivElement, PopconfirmProps>(
             ref={ref}
             role="alertdialog"
             aria-labelledby="popconfirm-title"
+            aria-describedby={description ? descId : undefined}
             className={cn(
               'absolute z-50 bg-neutral-background-1 text-neutral-foreground-1 rounded-medium shadow-8 border border-neutral-stroke-1 p-m min-w-[240px] animate-[fw-fade-slide-in_150ms_var(--ease-decelerate-mid)]',
               positionStyles[position],
@@ -120,7 +122,7 @@ export const Popconfirm = forwardRef<HTMLDivElement, PopconfirmProps>(
                   {title}
                 </span>
                 {description && (
-                  <span className="text-200 text-neutral-foreground-2 leading-200">
+                  <span id={descId} className="text-200 text-neutral-foreground-2 leading-200">
                     {description}
                   </span>
                 )}

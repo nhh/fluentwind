@@ -85,19 +85,59 @@ MenuTrigger.displayName = 'MenuTrigger';
 export const MenuPopover = forwardRef<HTMLDivElement, MenuPopoverProps>(
   ({ className, children, ...props }, ref) => {
     const { open, setOpen } = useContext(MenuContext);
+    const internalRef = useRef<HTMLDivElement>(null);
+
+    // Focus first menuitem when menu opens
+    useEffect(() => {
+      if (open && internalRef.current) {
+        const firstItem = internalRef.current.querySelector<HTMLElement>('[role="menuitem"]:not([disabled])');
+        firstItem?.focus();
+      }
+    }, [open]);
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
       if (e.key === 'Escape') {
         e.stopPropagation();
         setOpen(false);
+        return;
+      }
+
+      const container = internalRef.current;
+      if (!container) return;
+
+      const items = Array.from(container.querySelectorAll<HTMLElement>('[role="menuitem"]:not([disabled])'));
+      if (items.length === 0) return;
+
+      const currentIndex = items.indexOf(document.activeElement as HTMLElement);
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        const next = currentIndex < items.length - 1 ? currentIndex + 1 : 0;
+        items[next]?.focus();
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        const prev = currentIndex > 0 ? currentIndex - 1 : items.length - 1;
+        items[prev]?.focus();
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        items[0]?.focus();
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        items[items.length - 1]?.focus();
       }
     };
 
     if (!open) return null;
 
+    const setRefs = (el: HTMLDivElement | null) => {
+      (internalRef as React.MutableRefObject<HTMLDivElement | null>).current = el;
+      if (typeof ref === 'function') ref(el);
+      else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = el;
+    };
+
     return (
       <div
-        ref={ref}
+        ref={setRefs}
         role="menu"
         onKeyDown={handleKeyDown}
         className={cn(

@@ -1,4 +1,4 @@
-import { forwardRef, useState, useRef, useEffect, useCallback, type KeyboardEvent } from 'react';
+import { forwardRef, useState, useRef, useEffect, useCallback, useId, type KeyboardEvent } from 'react';
 import { cva } from 'class-variance-authority';
 import { cn } from '../../utils/cn';
 import type { DropdownProps } from './Dropdown.types';
@@ -68,6 +68,7 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
     const containerRef = useRef<HTMLDivElement>(null);
     const triggerBtnRef = useRef<HTMLButtonElement>(null);
     const listboxRef = useRef<HTMLDivElement>(null);
+    const listboxId = useId();
 
     const selectedOption = options.find((o) => o.value === value);
 
@@ -151,6 +152,7 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
           role="combobox"
           aria-expanded={open}
           aria-haspopup="listbox"
+          aria-controls={open ? listboxId : undefined}
           disabled={disabled}
           className={cn(
             triggerVariants({ appearance, size }),
@@ -168,6 +170,8 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
           <div
             ref={listboxRef}
             role="listbox"
+            id={listboxId}
+            aria-label="Options"
             tabIndex={-1}
             onKeyDown={handleListboxKeyDown}
             className="absolute top-full left-0 z-50 mt-xxs w-full min-w-[160px] bg-neutral-background-1 text-neutral-foreground-1 rounded-medium shadow-16 border border-neutral-stroke-1 py-xs outline-none animate-[fw-fade-slide-in_150ms_var(--ease-decelerate-mid)]"
