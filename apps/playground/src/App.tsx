@@ -6,32 +6,44 @@ import { registry } from './demos/registry';
 
 const categories = [
   {
-    label: 'General',
-    items: ['Button', 'Text', 'Label', 'Link', 'Icon', 'Image', 'Divider'],
+    label: 'Actions',
+    items: ['Button', 'Link', 'FloatButton', 'Popconfirm'],
   },
   {
-    label: 'Data Display',
-    items: ['Avatar', 'AvatarGroup', 'Badge', 'Card', 'Persona', 'Tag', 'Statistic', 'Empty', 'Table', 'List', 'Tree', 'Timeline', 'Skeleton', 'Carousel'],
+    label: 'Text & Icons',
+    items: ['Text', 'Label', 'Icon', 'Image'],
   },
   {
-    label: 'Form',
-    items: ['Input', 'Textarea', 'Searchbox', 'Select', 'Combobox', 'Checkbox', 'RadioGroup', 'Switch', 'Slider', 'SpinButton', 'DatePicker', 'TimePicker', 'ColorPicker', 'Upload', 'Transfer', 'Field', 'Segmented', 'TagPicker', 'Rating'],
+    label: 'Inputs',
+    items: ['Input', 'Textarea', 'Searchbox', 'Select', 'Combobox', 'Dropdown', 'Checkbox', 'RadioGroup', 'Switch', 'Slider', 'SpinButton', 'Segmented', 'Rating'],
   },
   {
-    label: 'Navigation',
-    items: ['Tablist', 'Breadcrumb', 'Nav', 'Toolbar', 'Pagination', 'Steps'],
+    label: 'Pickers',
+    items: ['DatePicker', 'TimePicker', 'ColorPicker', 'TagPicker', 'Upload', 'Transfer'],
   },
   {
-    label: 'Feedback',
-    items: ['Spinner', 'ProgressBar', 'Alert', 'MessageBar', 'Toast', 'Popconfirm'],
-  },
-  {
-    label: 'Overlay',
-    items: ['Dialog', 'Drawer', 'Popover', 'Tooltip', 'Menu', 'Dropdown', 'InfoLabel'],
+    label: 'Data',
+    items: ['Table', 'DataGrid', 'List', 'Tree', 'Timeline', 'Carousel', 'Pagination'],
   },
   {
     label: 'Layout',
-    items: ['Accordion', 'FloatButton'],
+    items: ['Card', 'Divider', 'Accordion', 'Tablist', 'Field'],
+  },
+  {
+    label: 'Navigation',
+    items: ['Nav', 'Breadcrumb', 'Toolbar', 'Steps'],
+  },
+  {
+    label: 'Status & Info',
+    items: ['Badge', 'Tag', 'Statistic', 'Avatar', 'AvatarGroup', 'Persona', 'InfoLabel'],
+  },
+  {
+    label: 'Feedback',
+    items: ['Alert', 'MessageBar', 'Toast', 'Spinner', 'ProgressBar', 'Skeleton', 'Empty'],
+  },
+  {
+    label: 'Overlays',
+    items: ['Dialog', 'Drawer', 'Popover', 'Tooltip', 'Menu'],
   },
 ];
 
@@ -85,10 +97,10 @@ function Sidebar({
         <ThemeSwitcher />
       </div>
 
-      <nav className="flex-1 overflow-y-auto p-s space-y-m">
+      <nav className="flex-1 overflow-y-auto p-s space-y-xs">
         {categories.map((category) => (
           <div key={category.label}>
-            <h2 className="text-100 uppercase font-semibold text-neutral-foreground-3 px-m mb-xxs tracking-wide">
+            <h2 className="text-200 leading-200 font-semibold text-neutral-foreground-1 px-m pt-m pb-xs">
               {category.label}
             </h2>
             <ul>
@@ -97,9 +109,9 @@ function Sidebar({
                   <button
                     type="button"
                     onClick={() => onSelect(item)}
-                    className={`w-full text-left text-200 px-m py-xs rounded-medium cursor-pointer transition-colors ${
+                    className={`w-full text-left text-200 leading-200 px-m py-xs rounded-medium cursor-pointer transition-colors ${
                       selected === item
-                        ? 'bg-brand-background-2 text-brand-foreground-2 font-medium'
+                        ? 'bg-brand-background-2 text-brand-foreground-2 font-semibold'
                         : 'text-neutral-foreground-2 hover:bg-subtle-background-hover'
                     }`}
                   >

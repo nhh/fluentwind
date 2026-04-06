@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import type { ComponentPageProps } from '../components/ComponentPage';
 import {
   Avatar,
@@ -28,7 +28,130 @@ import {
   CarouselItem,
   Button,
   Text,
+  DataGrid,
 } from '@fluentwind/react';
+import type { DataGridColumn, DataGridSortState } from '@fluentwind/react';
+
+// --- DataGrid mock data ---
+interface MockRow {
+  id: number;
+  name: string;
+  email: string;
+  department: string;
+  status: string;
+  joinDate: string;
+}
+
+const departments = ['Engineering', 'Design', 'Marketing', 'Sales', 'HR', 'Finance', 'Legal', 'Support'];
+const statuses = ['Active', 'Inactive', 'On Leave', 'Probation'];
+const firstNames = ['Alice', 'Bob', 'Charlie', 'Diana', 'Eve', 'Frank', 'Grace', 'Henry', 'Ivy', 'Jack', 'Kate', 'Leo', 'Mia', 'Noah', 'Olivia', 'Paul'];
+const lastNames = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez'];
+
+function generateRows(count: number): MockRow[] {
+  return Array.from({ length: count }, (_, i) => ({
+    id: i + 1,
+    name: `${firstNames[i % firstNames.length]} ${lastNames[i % lastNames.length]}`,
+    email: `user${i + 1}@example.com`,
+    department: departments[i % departments.length],
+    status: statuses[i % statuses.length],
+    joinDate: new Date(2020, i % 12, (i % 28) + 1).toLocaleDateString(),
+  }));
+}
+
+const mockRows = generateRows(5000);
+
+const statusColorMap: Record<string, 'success' | 'danger' | 'warning' | 'informative'> = {
+  Active: 'success',
+  Inactive: 'danger',
+  'On Leave': 'warning',
+  Probation: 'informative',
+};
+
+const dataGridColumns: DataGridColumn<MockRow>[] = [
+  { key: 'id', header: 'ID', width: '60px', sortable: true },
+  { key: 'name', header: 'Name', width: '1.5fr', sortable: true },
+  { key: 'email', header: 'Email', width: '1.5fr', sortable: true },
+  { key: 'department', header: 'Department', width: '1fr', sortable: true },
+  {
+    key: 'status',
+    header: 'Status',
+    width: '100px',
+    sortable: true,
+    renderCell: (row) => (
+      <Badge size="small" color={statusColorMap[row.status] ?? 'subtle'}>
+        {row.status}
+      </Badge>
+    ),
+  },
+  { key: 'joinDate', header: 'Join Date', width: '120px', sortable: true },
+];
+
+function DataGridDemo() {
+  const [sortState, setSortState] = useState<DataGridSortState | null>(null);
+
+  const sortedRows = useMemo(() => {
+    if (!sortState) return mockRows;
+    const { columnKey, direction } = sortState;
+    const sorted = [...mockRows].sort((a, b) => {
+      const aVal = a[columnKey as keyof MockRow];
+      const bVal = b[columnKey as keyof MockRow];
+      if (typeof aVal === 'number' && typeof bVal === 'number') {
+        return direction === 'ascending' ? aVal - bVal : bVal - aVal;
+      }
+      const aStr = String(aVal);
+      const bStr = String(bVal);
+      return direction === 'ascending' ? aStr.localeCompare(bStr) : bStr.localeCompare(aStr);
+    });
+    return sorted;
+  }, [sortState]);
+
+  return (
+    <DataGrid
+      columns={dataGridColumns}
+      rows={sortedRows}
+      getRowId={(row) => row.id}
+      height={500}
+      sortState={sortState}
+      onSortChange={setSortState}
+      selectionMode="multiple"
+      aria-label="Employee data grid"
+    />
+  );
+}
+
+function DataGridSingleSelectDemo() {
+  const [sortState, setSortState] = useState<DataGridSortState | null>(null);
+
+  const sortedRows = useMemo(() => {
+    if (!sortState) return mockRows;
+    const { columnKey, direction } = sortState;
+    const sorted = [...mockRows].sort((a, b) => {
+      const aVal = a[columnKey as keyof MockRow];
+      const bVal = b[columnKey as keyof MockRow];
+      if (typeof aVal === 'number' && typeof bVal === 'number') {
+        return direction === 'ascending' ? aVal - bVal : bVal - aVal;
+      }
+      const aStr = String(aVal);
+      const bStr = String(bVal);
+      return direction === 'ascending' ? aStr.localeCompare(bStr) : bStr.localeCompare(aStr);
+    });
+    return sorted;
+  }, [sortState]);
+
+  return (
+    <DataGrid
+      columns={dataGridColumns}
+      rows={sortedRows}
+      getRowId={(row) => row.id}
+      height={500}
+      sortState={sortState}
+      onSortChange={setSortState}
+      selectionMode="single"
+      dragSelection={false}
+      aria-label="Employee data grid (single select)"
+    />
+  );
+}
 
 function CarouselDemo() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -955,6 +1078,48 @@ export const dataDisplayDemos: Record<string, ComponentPageProps> = {
     <div>Auto Slide 3</div>
   </CarouselItem>
 </Carousel>`,
+      },
+    ],
+  },
+
+  DataGrid: {
+    name: 'DataGrid',
+    description: 'A high-performance virtualized data grid supporting sorting, single/multi selection, drag selection, and keyboard navigation over large datasets.',
+    examples: [
+      {
+        title: '5,000 Rows with Virtualization',
+        description: 'A fully interactive DataGrid with sortable columns, multi-select, drag selection, and keyboard navigation over 5,000 rows. Click column headers to sort. Click rows to select, Shift+click for range, Ctrl+click to toggle, or drag to select a range. Use Arrow keys, Page Up/Down, Home/End, and Ctrl+A.',
+        demo: <DataGridDemo />,
+        code: `const [sortState, setSortState] = useState<DataGridSortState | null>(null);
+
+const sortedRows = useMemo(() => {
+  if (!sortState) return rows;
+  // ... sort logic based on sortState.columnKey and sortState.direction
+  return sorted;
+}, [sortState]);
+
+<DataGrid
+  columns={columns}
+  rows={sortedRows}
+  getRowId={(row) => row.id}
+  height={500}
+  sortState={sortState}
+  onSortChange={setSortState}
+  selectionMode="multiple"
+/>`,
+      },
+      {
+        title: 'Single Selection',
+        description: 'DataGrid with single-row selection mode. Only one row can be selected at a time. Drag selection is disabled.',
+        demo: <DataGridSingleSelectDemo />,
+        code: `<DataGrid
+  columns={columns}
+  rows={rows}
+  getRowId={(row) => row.id}
+  height={500}
+  selectionMode="single"
+  dragSelection={false}
+/>`,
       },
     ],
   },

@@ -223,3 +223,6 @@ export type { TransferProps, TransferItem } from './components/Transfer';
 
 export { FloatButton, FloatButtonGroup } from './components/FloatButton';
 export type { FloatButtonProps, FloatButtonGroupProps } from './components/FloatButton';
+
+export { DataGrid } from './components/DataGrid';
+export type { DataGridProps, DataGridColumn, DataGridSortState, SelectionMode, RowId } from './components/DataGrid';
