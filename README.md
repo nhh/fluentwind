@@ -7,7 +7,7 @@ Fluent 2 Design System components for React, powered by Tailwind CSS v4.
 | Package | Description |
 |---------|-------------|
 | `@fluentwind/tokens` | Fluent 2 design tokens as a Tailwind CSS v4 theme preset |
-| `@fluentwind/react` | React component library (49 components) |
+| `@fluentwind/react` | React component library (88+ components) |
 
 ## Quick Start
 
@@ -81,6 +81,25 @@ All Fluent 2 tokens are available as Tailwind utilities:
 pnpm install
 pnpm dev          # Start playground + watch mode
 pnpm build        # Build all packages
+pnpm e2e          # Run E2E tests (requires build first)
+```
+
+## Testing
+
+The project uses [Playwright](https://playwright.dev/) for end-to-end testing against the playground app. The test suite includes 311 tests:
+
+| Category | Tests | Description |
+|----------|-------|-------------|
+| Smoke | 7 | App load, sidebar navigation, theme switching |
+| Render | 80 | Every component page renders without JS errors |
+| Interactions | 44 | Overlays, inputs, actions, layout, data, feedback |
+| Accessibility | 80 | WCAG 2.2 AA scans per component (axe-core) |
+| Visual Regression | 100 | 20 key components x 5 themes screenshot comparison |
+
+```bash
+pnpm e2e                                        # Run all tests
+pnpm --filter @fluentwind/playground e2e:ui     # Open Playwright UI mode
+pnpm --filter @fluentwind/playground e2e:update-snapshots  # Update screenshot baselines
 ```
 
 ## Project Structure
