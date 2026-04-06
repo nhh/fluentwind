@@ -101,7 +101,7 @@ export const MenuPopover = forwardRef<HTMLDivElement, MenuPopoverProps>(
         role="menu"
         onKeyDown={handleKeyDown}
         className={cn(
-          'absolute top-full left-0 z-50 mt-xxs min-w-[160px] bg-neutral-background-1 text-neutral-foreground-1 rounded-medium shadow-16 border border-neutral-stroke-1 py-xs',
+          'absolute top-full left-0 z-50 mt-xxs min-w-[160px] bg-neutral-background-1 text-neutral-foreground-1 rounded-medium shadow-16 border border-neutral-stroke-1 py-xs animate-[fw-fade-slide-in_150ms_var(--ease-decelerate-mid)]',
           className,
         )}
         {...props}

@@ -170,7 +170,7 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
             role="listbox"
             tabIndex={-1}
             onKeyDown={handleListboxKeyDown}
-            className="absolute top-full left-0 z-50 mt-xxs w-full min-w-[160px] bg-neutral-background-1 text-neutral-foreground-1 rounded-medium shadow-16 border border-neutral-stroke-1 py-xs outline-none"
+            className="absolute top-full left-0 z-50 mt-xxs w-full min-w-[160px] bg-neutral-background-1 text-neutral-foreground-1 rounded-medium shadow-16 border border-neutral-stroke-1 py-xs outline-none animate-[fw-fade-slide-in_150ms_var(--ease-decelerate-mid)]"
           >
             {options.map((option) => (
               <button

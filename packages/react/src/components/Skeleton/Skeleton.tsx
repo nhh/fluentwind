@@ -46,7 +46,7 @@ export const SkeletonItem = forwardRef<HTMLDivElement, SkeletonItemProps>(
           shapeClasses[shape],
           animation === 'pulse' && 'animate-pulse',
           animation === 'wave' &&
-            'relative overflow-hidden after:absolute after:inset-0 after:bg-gradient-to-r after:from-transparent after:via-neutral-background-1/40 after:to-transparent after:animate-[shimmer_2s_infinite]',
+            'relative overflow-hidden after:absolute after:inset-0 after:bg-gradient-to-r after:from-transparent after:via-neutral-background-1/40 after:to-transparent after:animate-[fw-shimmer_2s_var(--ease-easy)_infinite]',
           className,
         )}
         style={{ ...sizeStyle, ...style }}

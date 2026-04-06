@@ -202,7 +202,7 @@ export const FloatButtonGroup = forwardRef<HTMLDivElement, FloatButtonGroupProps
           {/* Children float buttons */}
           <div
             className={cn(
-              'flex flex-col-reverse items-center gap-s transition-all duration-normal',
+              'flex flex-col-reverse items-center gap-s transition-all duration-normal ease-decelerate-mid',
               isOpen
                 ? 'opacity-100 translate-y-0 pointer-events-auto'
                 : 'opacity-0 translate-y-2 pointer-events-none',

@@ -107,19 +107,30 @@ function ToastItem({
   toast: ToastData;
   onDismiss: (id: string) => void;
 }) {
+  const [exiting, setExiting] = useState(false);
+
   useEffect(() => {
     if (toast.timeout > 0) {
-      const timer = setTimeout(() => onDismiss(toast.id), toast.timeout);
+      const timer = setTimeout(() => setExiting(true), toast.timeout);
       return () => clearTimeout(timer);
     }
-  }, [toast.id, toast.timeout, onDismiss]);
+  }, [toast.id, toast.timeout]);
+
+  const handleDismiss = useCallback(() => setExiting(true), []);
+
+  const handleAnimationEnd = useCallback(() => {
+    if (exiting) onDismiss(toast.id);
+  }, [exiting, onDismiss, toast.id]);
 
   return (
     <div
       role="alert"
+      onAnimationEnd={handleAnimationEnd}
       className={cn(
         'flex items-start gap-s px-m py-s rounded-medium shadow-16 bg-neutral-background-1 text-neutral-foreground-1 border border-neutral-stroke-1',
-        'animate-[slideIn_200ms_ease-out]',
+        exiting
+          ? 'animate-[fw-slide-out-bottom_150ms_var(--ease-accelerate-mid)_forwards]'
+          : 'animate-[fw-slide-in-bottom_200ms_var(--ease-decelerate-mid)]',
       )}
     >
       <span className="shrink-0 mt-0.5">{intentIcons[toast.intent]}</span>
@@ -127,8 +138,8 @@ function ToastItem({
       <button
         type="button"
         aria-label="Dismiss"
-        onClick={() => onDismiss(toast.id)}
-        className="shrink-0 p-1 rounded-medium hover:bg-subtle-background-hover transition-colors duration-fast"
+        onClick={handleDismiss}
+        className="shrink-0 p-1 rounded-medium hover:bg-subtle-background-hover transition-colors duration-fast cursor-pointer"
       >
         <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
           <path d="M4.09 4.22a.75.75 0 0 1 1.06-.04L10 8.94l4.85-4.76a.75.75 0 1 1 1.06 1.06L11.06 10l4.85 4.76a.75.75 0 1 1-1.06 1.06L10 11.06l-4.85 4.76a.75.75 0 0 1-1.06-1.06L8.94 10 4.09 5.24a.75.75 0 0 1-.04-1.06l.04.04Z" />

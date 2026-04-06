@@ -27,13 +27,8 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
     const h = thickness === 'large' ? 'h-1' : 'h-0.5';
     const r = shape === 'rounded' ? 'rounded-circular' : '';
 
-    const indeterminateKeyframes = isIndeterminate ? (
-      <style>{`@keyframes indeterminate { 0% { transform: translateX(-100%); } 100% { transform: translateX(400%); } }`}</style>
-    ) : null;
-
     return (
       <>
-        {indeterminateKeyframes}
         <div
           ref={ref}
           role="progressbar"
@@ -45,12 +40,12 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
         >
           <div
             className={cn(
-              'h-full transition-all duration-normal',
+              'h-full transition-all duration-normal ease-easy-max',
               r,
               barColors[color],
               isIndeterminate && 'w-1/3',
             )}
-            style={isIndeterminate ? { animation: 'indeterminate 1.5s ease-in-out infinite' } : { width: `${percent}%` }}
+            style={isIndeterminate ? { animation: 'fw-indeterminate 1.5s var(--ease-easy) infinite' } : { width: `${percent}%` }}
           />
         </div>
       </>

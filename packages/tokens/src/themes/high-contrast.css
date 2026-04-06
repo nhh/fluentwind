@@ -115,6 +115,14 @@
   --fw-status-warning-foreground-3: #000000;
   --fw-status-warning-stroke-1: #ffffff;
 
+  /* --- Status: Information --- */
+  --fw-status-information: #ffffff;
+  --fw-status-information-background-1: #000000;
+  --fw-status-information-background-3: #ffffff;
+  --fw-status-information-foreground-1: #ffffff;
+  --fw-status-information-foreground-3: #000000;
+  --fw-status-information-stroke-1: #ffffff;
+
   /* --- Shadows (none in high contrast) --- */
   --fw-shadow-2: none;
   --fw-shadow-4: none;

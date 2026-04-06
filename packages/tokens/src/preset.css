@@ -129,6 +129,12 @@
   --color-status-warning-foreground-1: var(--fw-status-warning-foreground-1);
   --color-status-warning-foreground-3: var(--fw-status-warning-foreground-3);
   --color-status-warning-stroke-1: var(--fw-status-warning-stroke-1);
+  --color-status-information: var(--fw-status-information);
+  --color-status-information-background-1: var(--fw-status-information-background-1);
+  --color-status-information-background-3: var(--fw-status-information-background-3);
+  --color-status-information-foreground-1: var(--fw-status-information-foreground-1);
+  --color-status-information-foreground-3: var(--fw-status-information-foreground-3);
+  --color-status-information-stroke-1: var(--fw-status-information-stroke-1);
 
   /* Brand Ramp (raw steps) */
   --color-brand-10: var(--fw-brand-10);
@@ -264,4 +270,62 @@
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1366px;
   --breakpoint-2xl: 1920px;
+}
+
+/* ==========================================================================
+   FluentWind @keyframes — Fluent 2 Motion Animations
+   Naming: fw-* prefix to avoid collisions.
+   Enter = decelerate easing, Exit = accelerate easing.
+   All animated properties are opacity + transform (GPU-composited).
+   ========================================================================== */
+
+/* Toast enter: slide up + fade in */
+@keyframes fw-slide-in-bottom {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Toast exit: slide down + fade out */
+@keyframes fw-slide-out-bottom {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(16px); }
+}
+
+/* Skeleton shimmer: gradient sweep */
+@keyframes fw-shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Dialog / large surfaces enter: fade + scale up */
+@keyframes fw-fade-scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Dialog exit: fade + scale down */
+@keyframes fw-fade-scale-out {
+  from { opacity: 1; transform: scale(1); }
+  to   { opacity: 0; transform: scale(0.95); }
+}
+
+/* Popover/Tooltip/Menu/Dropdown enter: fade + slight Y shift */
+@keyframes fw-fade-slide-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ProgressBar indeterminate */
+@keyframes fw-indeterminate {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(400%); }
+}
+
+/* Reduced motion: collapse all animations to near-instant */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

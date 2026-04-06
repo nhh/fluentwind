@@ -138,7 +138,7 @@ export const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProp
     const chevron = (
       <svg
         className={cn(
-          'h-4 w-4 shrink-0 transition-transform duration-normal',
+          'h-4 w-4 shrink-0 transition-transform duration-normal ease-easy-max',
           open && 'rotate-90',
         )}
         viewBox="0 0 20 20"
@@ -188,7 +188,7 @@ export const AccordionPanel = forwardRef<HTMLDivElement, AccordionPanelProps>(
         id={`panel-${value}`}
         aria-labelledby={`header-${value}`}
         className={cn(
-          'overflow-hidden transition-all duration-normal',
+          'overflow-hidden transition-all duration-normal ease-easy-max',
           open ? 'grid grid-rows-[1fr] opacity-100' : 'grid grid-rows-[0fr] opacity-0',
           className,
         )}

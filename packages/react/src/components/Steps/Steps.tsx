@@ -41,7 +41,7 @@ const indicatorVariants = cva(
         wait: 'border-neutral-stroke-1 bg-neutral-background-1 text-neutral-foreground-3',
         process: 'border-brand-stroke-1 bg-brand-background text-neutral-foreground-on-brand',
         finish: 'border-brand-stroke-1 bg-brand-background text-neutral-foreground-on-brand',
-        error: 'border-palette-red-border-2 bg-palette-red-background-3 text-palette-red-foreground-1',
+        error: 'border-status-danger-stroke-1 bg-status-danger-background-3 text-status-danger-foreground-1',
       },
     },
     defaultVariants: {
@@ -180,7 +180,7 @@ export const StepItem = forwardRef<HTMLDivElement, StepItemProps>(
                 'font-semibold transition-colors duration-fast',
                 size === 'small' ? 'text-200 leading-200' : 'text-300 leading-300',
                 status === 'process' && 'text-brand-foreground-1',
-                status === 'error' && 'text-palette-red-foreground-1',
+                status === 'error' && 'text-status-danger-foreground-1',
                 status === 'wait' && 'text-neutral-foreground-3',
                 status === 'finish' && 'text-neutral-foreground-1',
               )}
@@ -217,7 +217,7 @@ export const StepItem = forwardRef<HTMLDivElement, StepItemProps>(
                 'font-semibold whitespace-nowrap transition-colors duration-fast',
                 size === 'small' ? 'text-200 leading-200' : 'text-300 leading-300',
                 status === 'process' && 'text-brand-foreground-1',
-                status === 'error' && 'text-palette-red-foreground-1',
+                status === 'error' && 'text-status-danger-foreground-1',
                 status === 'wait' && 'text-neutral-foreground-3',
                 status === 'finish' && 'text-neutral-foreground-1',
               )}

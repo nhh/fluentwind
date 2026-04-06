@@ -55,7 +55,7 @@ export const Dialog = ({
   return (
     <dialog
       ref={dialogRef}
-      className="backdrop:bg-black/40 bg-transparent p-0 m-auto open:flex"
+      className="backdrop:bg-black/40 bg-transparent p-0 m-auto open:flex open:animate-[fw-fade-scale-in_250ms_var(--ease-decelerate-mid)]"
       aria-modal={modalType === 'modal' || modalType === 'alert' ? true : undefined}
       role={modalType === 'alert' ? 'alertdialog' : undefined}
       onCancel={handleCancel}

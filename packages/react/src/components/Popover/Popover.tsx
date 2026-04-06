@@ -73,7 +73,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
           <div
             ref={ref}
             className={cn(
-              'absolute z-50 bg-neutral-background-1 text-neutral-foreground-1 rounded-medium shadow-16 p-m border border-neutral-stroke-1',
+              'absolute z-50 bg-neutral-background-1 text-neutral-foreground-1 rounded-medium shadow-16 p-m border border-neutral-stroke-1 animate-[fw-fade-slide-in_150ms_var(--ease-decelerate-mid)]',
               positionStyles[positioning],
             )}
           >

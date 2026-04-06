@@ -109,7 +109,7 @@ export const Popconfirm = forwardRef<HTMLDivElement, PopconfirmProps>(
             role="alertdialog"
             aria-labelledby="popconfirm-title"
             className={cn(
-              'absolute z-50 bg-neutral-background-1 text-neutral-foreground-1 rounded-medium shadow-8 border border-neutral-stroke-1 p-m min-w-[240px]',
+              'absolute z-50 bg-neutral-background-1 text-neutral-foreground-1 rounded-medium shadow-8 border border-neutral-stroke-1 p-m min-w-[240px] animate-[fw-fade-slide-in_150ms_var(--ease-decelerate-mid)]',
               positionStyles[position],
             )}
           >

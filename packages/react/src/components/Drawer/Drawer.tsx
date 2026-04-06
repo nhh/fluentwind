@@ -79,7 +79,7 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
         aria-modal={type === 'overlay' ? true : undefined}
         onKeyDown={handleKeyDown}
         className={cn(
-          'bg-neutral-background-1 text-neutral-foreground-1 border-neutral-stroke-1 flex flex-col overflow-auto transition-transform duration-normal',
+          'bg-neutral-background-1 text-neutral-foreground-1 border-neutral-stroke-1 flex flex-col overflow-auto transition-transform duration-normal ease-easy-max',
           type === 'overlay' && 'fixed z-[1000] shadow-64',
           type === 'inline' && 'relative',
           positionClasses[position],
@@ -108,7 +108,7 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
         {/* Backdrop */}
         <div
           className={cn(
-            'fixed inset-0 z-[999] bg-black/40 transition-opacity duration-normal',
+            'fixed inset-0 z-[999] bg-black/40 transition-opacity duration-normal ease-easy-max',
             open ? 'opacity-100' : 'opacity-0 pointer-events-none',
           )}
           onClick={() => onOpenChange(false)}
