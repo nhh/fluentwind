@@ -7,15 +7,15 @@ import { registry } from './demos/registry';
 const categories = [
   {
     label: 'Actions',
-    items: ['Button', 'Link', 'FloatButton', 'Popconfirm'],
+    items: ['Button', 'Link', 'FloatButton', 'Popconfirm', 'ToggleGroup'],
   },
   {
     label: 'Text & Icons',
-    items: ['Text', 'Label', 'Icon', 'Image'],
+    items: ['Text', 'Label', 'Icon', 'Image', 'QRCode'],
   },
   {
     label: 'Inputs',
-    items: ['Input', 'Textarea', 'Searchbox', 'Select', 'Combobox', 'Dropdown', 'Checkbox', 'RadioGroup', 'Switch', 'Slider', 'SpinButton', 'Segmented', 'Rating'],
+    items: ['Input', 'PasswordInput', 'Textarea', 'Mentions', 'Searchbox', 'Select', 'Combobox', 'Dropdown', 'Cascader', 'TreeSelect', 'Checkbox', 'RadioGroup', 'Switch', 'Slider', 'SpinButton', 'PinInput', 'Segmented', 'Rating'],
   },
   {
     label: 'Pickers',
@@ -23,15 +23,15 @@ const categories = [
   },
   {
     label: 'Data',
-    items: ['Table', 'DataGrid', 'List', 'Tree', 'Timeline', 'Carousel', 'Pagination'],
+    items: ['Table', 'DataGrid', 'List', 'Tree', 'Calendar', 'Timeline', 'Carousel', 'Pagination', 'Descriptions'],
   },
   {
     label: 'Layout',
-    items: ['Card', 'Divider', 'Accordion', 'Tablist', 'Field'],
+    items: ['Card', 'Divider', 'Accordion', 'Tablist', 'Splitter', 'AspectRatio', 'ScrollArea', 'Field', 'Form'],
   },
   {
     label: 'Navigation',
-    items: ['Nav', 'Breadcrumb', 'Toolbar', 'Steps'],
+    items: ['Nav', 'Menubar', 'Breadcrumb', 'Toolbar', 'Steps', 'Tour'],
   },
   {
     label: 'Status & Info',
@@ -39,11 +39,11 @@ const categories = [
   },
   {
     label: 'Feedback',
-    items: ['Alert', 'MessageBar', 'Toast', 'Spinner', 'ProgressBar', 'Skeleton', 'Empty'],
+    items: ['Alert', 'MessageBar', 'Toast', 'Notification', 'Spinner', 'ProgressBar', 'Skeleton', 'Empty'],
   },
   {
     label: 'Overlays',
-    items: ['Dialog', 'Drawer', 'Popover', 'Tooltip', 'Menu'],
+    items: ['Dialog', 'Drawer', 'Popover', 'Tooltip', 'HoverCard', 'Menu', 'ContextMenu'],
   },
 ];
 
