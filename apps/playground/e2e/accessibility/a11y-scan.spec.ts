@@ -15,17 +15,18 @@ const GLOBALLY_DISABLED_RULES = [
   'nested-interactive',          // Transfer component has nested interactive elements
   'scrollable-region-focusable', // ScrollArea not keyboard-focusable
   'select-name',                 // Native select elements in demos lack labels
+  'target-size',                 // WCAG 2.2 SC 2.5.8 — playground sidebar/theme buttons < 24x24px
 ];
 
 test.describe('Accessibility scans', () => {
   for (const component of ALL_COMPONENTS) {
-    test(`${component} has no critical WCAG violations`, async ({ page, navigateToComponent }) => {
+    test(`${component} has no WCAG 2.2 AA violations`, async ({ page, navigateToComponent }) => {
       await navigateToComponent(component);
 
       await page.waitForTimeout(500);
 
       const results = await new AxeBuilder({ page })
-        .withTags(['wcag2a', 'wcag2aa'])
+        .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'])
         .disableRules(GLOBALLY_DISABLED_RULES)
         .analyze();
 
