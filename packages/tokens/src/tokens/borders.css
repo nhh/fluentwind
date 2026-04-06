@@ -1,0 +1,24 @@
+/* ==========================================================================
+   Fluent 2 Border Radius & Stroke Width Tokens
+   ========================================================================== */
+
+@theme {
+  /* --- Border Radius --- */
+  --radius-none: 0px;
+  --radius-small: 2px;
+  --radius-medium: 4px;
+  --radius-large: 6px;
+  --radius-xlarge: 8px;
+  --radius-2xlarge: 12px;
+  --radius-3xlarge: 16px;
+  --radius-4xlarge: 24px;
+  --radius-5xlarge: 32px;
+  --radius-6xlarge: 40px;
+  --radius-circular: 10000px;
+
+  /* --- Stroke Widths (border widths) --- */
+  --border-thin: 1px;
+  --border-thick: 2px;
+  --border-thicker: 3px;
+  --border-thickest: 4px;
+}

@@ -1,0 +1,125 @@
+/* ==========================================================================
+   Fluent 2 Theme: High Contrast
+   ========================================================================== */
+
+[data-theme='high-contrast'] {
+  /* --- Brand (high contrast uses system highlight) --- */
+  --fw-brand-10: #000000;
+  --fw-brand-20: #000000;
+  --fw-brand-30: #000000;
+  --fw-brand-40: #000000;
+  --fw-brand-50: #000000;
+  --fw-brand-60: #1aebff;
+  --fw-brand-70: #1aebff;
+  --fw-brand-80: #1aebff;
+  --fw-brand-90: #1aebff;
+  --fw-brand-100: #1aebff;
+  --fw-brand-110: #1aebff;
+  --fw-brand-120: #1aebff;
+  --fw-brand-130: #1aebff;
+  --fw-brand-140: #1aebff;
+  --fw-brand-150: #1aebff;
+  --fw-brand-160: #1aebff;
+
+  /* --- Neutral Foreground --- */
+  --fw-neutral-foreground-1: #ffffff;
+  --fw-neutral-foreground-2: #ffffff;
+  --fw-neutral-foreground-3: #ffffff;
+  --fw-neutral-foreground-4: #ffffff;
+  --fw-neutral-foreground-disabled: #3ff23f;
+  --fw-neutral-foreground-inverted: #000000;
+  --fw-neutral-foreground-on-brand: #000000;
+
+  /* --- Neutral Background --- */
+  --fw-neutral-background-1: #000000;
+  --fw-neutral-background-1-hover: #000000;
+  --fw-neutral-background-1-pressed: #000000;
+  --fw-neutral-background-1-selected: #000000;
+  --fw-neutral-background-2: #000000;
+  --fw-neutral-background-3: #000000;
+  --fw-neutral-background-3-hover: #000000;
+  --fw-neutral-background-3-pressed: #000000;
+  --fw-neutral-background-4: #000000;
+  --fw-neutral-background-5: #000000;
+  --fw-neutral-background-6: #000000;
+  --fw-neutral-background-inverted: #ffffff;
+  --fw-neutral-background-static: #000000;
+  --fw-neutral-background-subtle: transparent;
+  --fw-neutral-background-disabled: #000000;
+
+  /* --- Neutral Stroke --- */
+  --fw-neutral-stroke-1: #ffffff;
+  --fw-neutral-stroke-1-hover: #ffffff;
+  --fw-neutral-stroke-1-pressed: #ffffff;
+  --fw-neutral-stroke-2: #ffffff;
+  --fw-neutral-stroke-3: #ffffff;
+  --fw-neutral-stroke-accessible: #ffffff;
+  --fw-neutral-stroke-accessible-hover: #1aebff;
+  --fw-neutral-stroke-accessible-pressed: #1aebff;
+  --fw-neutral-stroke-disabled: #3ff23f;
+  --fw-neutral-stroke-focus-1: #000000;
+  --fw-neutral-stroke-focus-2: #ffffff;
+
+  /* --- Brand Colors --- */
+  --fw-brand-background: #1aebff;
+  --fw-brand-background-hover: #1aebff;
+  --fw-brand-background-pressed: #1aebff;
+  --fw-brand-background-selected: #1aebff;
+  --fw-brand-background-2: #000000;
+  --fw-brand-background-2-hover: #1aebff;
+  --fw-brand-background-2-pressed: #1aebff;
+  --fw-brand-background-inverted: #000000;
+  --fw-brand-background-static: #1aebff;
+  --fw-brand-foreground-1: #1aebff;
+  --fw-brand-foreground-2: #1aebff;
+  --fw-brand-foreground-link: #ffff00;
+  --fw-brand-foreground-link-hover: #ffff00;
+  --fw-brand-foreground-link-pressed: #ffff00;
+  --fw-brand-foreground-inverted: #000000;
+  --fw-brand-foreground-on-light: #1aebff;
+  --fw-brand-stroke-1: #1aebff;
+  --fw-brand-stroke-2: #1aebff;
+  --fw-brand-stroke-2-contrast: #1aebff;
+
+  /* --- Subtle --- */
+  --fw-subtle-background: transparent;
+  --fw-subtle-background-hover: #1aebff;
+  --fw-subtle-background-pressed: #1aebff;
+  --fw-subtle-background-selected: #1aebff;
+  --fw-subtle-background-inverted: transparent;
+
+  /* --- Transparent --- */
+  --fw-transparent-background: transparent;
+  --fw-transparent-background-hover: transparent;
+  --fw-transparent-background-pressed: transparent;
+  --fw-transparent-background-selected: transparent;
+  --fw-transparent-stroke: transparent;
+
+  /* --- Status Colors --- */
+  --fw-status-danger: #ffffff;
+  --fw-status-danger-background-1: #000000;
+  --fw-status-danger-background-3: #ffffff;
+  --fw-status-danger-foreground-1: #ffffff;
+  --fw-status-danger-foreground-3: #000000;
+  --fw-status-danger-stroke-1: #ffffff;
+  --fw-status-success: #ffffff;
+  --fw-status-success-background-1: #000000;
+  --fw-status-success-background-3: #ffffff;
+  --fw-status-success-foreground-1: #ffffff;
+  --fw-status-success-foreground-3: #000000;
+  --fw-status-success-stroke-1: #ffffff;
+  --fw-status-warning: #ffffff;
+  --fw-status-warning-background-1: #000000;
+  --fw-status-warning-background-3: #ffffff;
+  --fw-status-warning-foreground-1: #ffffff;
+  --fw-status-warning-foreground-3: #000000;
+  --fw-status-warning-stroke-1: #ffffff;
+
+  /* --- Shadows (none in high contrast) --- */
+  --fw-shadow-2: none;
+  --fw-shadow-4: none;
+  --fw-shadow-8: none;
+  --fw-shadow-16: none;
+  --fw-shadow-28: none;
+  --fw-shadow-64: none;
+}

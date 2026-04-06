@@ -1,0 +1,12 @@
+/* ==========================================================================
+   Fluent 2 Shadow Tokens
+   ========================================================================== */
+
+@theme {
+  --shadow-2: var(--fw-shadow-2);
+  --shadow-4: var(--fw-shadow-4);
+  --shadow-8: var(--fw-shadow-8);
+  --shadow-16: var(--fw-shadow-16);
+  --shadow-28: var(--fw-shadow-28);
+  --shadow-64: var(--fw-shadow-64);
+}

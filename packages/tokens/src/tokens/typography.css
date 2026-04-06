@@ -1,0 +1,40 @@
+/* ==========================================================================
+   Fluent 2 Typography Tokens
+   ========================================================================== */
+
+@theme {
+  /* --- Font Families --- */
+  --font-base: 'Segoe UI', 'Segoe UI Web (West European)', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
+  --font-mono: Consolas, 'Courier New', Courier, monospace;
+  --font-numeric: Bahnschrift, 'Segoe UI', 'Segoe UI Web (West European)', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
+
+  /* --- Font Sizes (maps to text-100 through text-1000) --- */
+  --text-100: 10px;
+  --text-200: 12px;
+  --text-300: 14px;
+  --text-400: 16px;
+  --text-500: 20px;
+  --text-600: 24px;
+  --text-700: 28px;
+  --text-800: 32px;
+  --text-900: 40px;
+  --text-1000: 68px;
+
+  /* --- Line Heights (maps to leading-100 through leading-1000) --- */
+  --leading-100: 14px;
+  --leading-200: 16px;
+  --leading-300: 20px;
+  --leading-400: 22px;
+  --leading-500: 28px;
+  --leading-600: 32px;
+  --leading-700: 36px;
+  --leading-800: 40px;
+  --leading-900: 52px;
+  --leading-1000: 92px;
+
+  /* --- Font Weights --- */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+}

@@ -1,0 +1,214 @@
+/* ==========================================================================
+   Fluent 2 Global Tokens — Raw color ramps
+   ========================================================================== */
+
+:root {
+  /* Grey Ramp */
+  --fw-grey-2: #050505;
+  --fw-grey-4: #0a0a0a;
+  --fw-grey-6: #0f0f0f;
+  --fw-grey-8: #141414;
+  --fw-grey-10: #1a1a1a;
+  --fw-grey-12: #1f1f1f;
+  --fw-grey-14: #242424;
+  --fw-grey-16: #292929;
+  --fw-grey-18: #2e2e2e;
+  --fw-grey-20: #333333;
+  --fw-grey-22: #383838;
+  --fw-grey-24: #3d3d3d;
+  --fw-grey-26: #424242;
+  --fw-grey-28: #474747;
+  --fw-grey-30: #4d4d4d;
+  --fw-grey-32: #525252;
+  --fw-grey-34: #575757;
+  --fw-grey-36: #5c5c5c;
+  --fw-grey-38: #616161;
+  --fw-grey-40: #666666;
+  --fw-grey-42: #6b6b6b;
+  --fw-grey-44: #707070;
+  --fw-grey-46: #757575;
+  --fw-grey-48: #7a7a7a;
+  --fw-grey-50: #808080;
+  --fw-grey-52: #858585;
+  --fw-grey-54: #8a8a8a;
+  --fw-grey-56: #8f8f8f;
+  --fw-grey-58: #949494;
+  --fw-grey-60: #999999;
+  --fw-grey-62: #9e9e9e;
+  --fw-grey-64: #a3a3a3;
+  --fw-grey-66: #a8a8a8;
+  --fw-grey-68: #adadad;
+  --fw-grey-70: #b3b3b3;
+  --fw-grey-72: #b8b8b8;
+  --fw-grey-74: #bdbdbd;
+  --fw-grey-76: #c2c2c2;
+  --fw-grey-78: #c7c7c7;
+  --fw-grey-80: #cccccc;
+  --fw-grey-82: #d1d1d1;
+  --fw-grey-84: #d6d6d6;
+  --fw-grey-86: #dbdbdb;
+  --fw-grey-88: #e0e0e0;
+  --fw-grey-90: #e6e6e6;
+  --fw-grey-92: #ebebeb;
+  --fw-grey-94: #f0f0f0;
+  --fw-grey-96: #f5f5f5;
+  --fw-grey-98: #fafafa;
+  --fw-grey-99: #fcfcfc;
+  --fw-white: #ffffff;
+  --fw-black: #000000;
+
+  /* Alpha Channels */
+  --fw-black-alpha-5: rgba(0, 0, 0, 0.05);
+  --fw-black-alpha-10: rgba(0, 0, 0, 0.1);
+  --fw-black-alpha-20: rgba(0, 0, 0, 0.2);
+  --fw-black-alpha-30: rgba(0, 0, 0, 0.3);
+  --fw-black-alpha-40: rgba(0, 0, 0, 0.4);
+  --fw-black-alpha-50: rgba(0, 0, 0, 0.5);
+  --fw-black-alpha-60: rgba(0, 0, 0, 0.6);
+  --fw-black-alpha-70: rgba(0, 0, 0, 0.7);
+  --fw-black-alpha-80: rgba(0, 0, 0, 0.8);
+  --fw-black-alpha-90: rgba(0, 0, 0, 0.9);
+
+  --fw-white-alpha-5: rgba(255, 255, 255, 0.05);
+  --fw-white-alpha-10: rgba(255, 255, 255, 0.1);
+  --fw-white-alpha-20: rgba(255, 255, 255, 0.2);
+  --fw-white-alpha-30: rgba(255, 255, 255, 0.3);
+  --fw-white-alpha-40: rgba(255, 255, 255, 0.4);
+  --fw-white-alpha-50: rgba(255, 255, 255, 0.5);
+  --fw-white-alpha-60: rgba(255, 255, 255, 0.6);
+  --fw-white-alpha-70: rgba(255, 255, 255, 0.7);
+  --fw-white-alpha-80: rgba(255, 255, 255, 0.8);
+  --fw-white-alpha-90: rgba(255, 255, 255, 0.9);
+
+  /* Shared Colors — Status */
+  --fw-red-shade-50: #210809;
+  --fw-red-shade-40: #3f1011;
+  --fw-red-shade-30: #751d1f;
+  --fw-red-shade-20: #9f282b;
+  --fw-red-shade-10: #bc2f32;
+  --fw-red-primary: #d13438;
+  --fw-red-tint-10: #d7494c;
+  --fw-red-tint-20: #dc5e62;
+  --fw-red-tint-30: #e37d80;
+  --fw-red-tint-40: #f1bbbc;
+  --fw-red-tint-50: #f8dadb;
+  --fw-red-tint-60: #fdf6f6;
+
+  --fw-green-shade-50: #031403;
+  --fw-green-shade-40: #052505;
+  --fw-green-shade-30: #094509;
+  --fw-green-shade-20: #0c5e0c;
+  --fw-green-shade-10: #0e700e;
+  --fw-green-primary: #107c10;
+  --fw-green-tint-10: #218c21;
+  --fw-green-tint-20: #359b35;
+  --fw-green-tint-30: #54b054;
+  --fw-green-tint-40: #9fd89f;
+  --fw-green-tint-50: #c9eac9;
+  --fw-green-tint-60: #f1faf1;
+
+  --fw-dark-orange-shade-50: #271002;
+  --fw-dark-orange-shade-40: #4a1e04;
+  --fw-dark-orange-shade-30: #8a380a;
+  --fw-dark-orange-shade-20: #bc4b09;
+  --fw-dark-orange-shade-10: #de590b;
+  --fw-dark-orange-primary: #da3b01;
+  --fw-dark-orange-tint-10: #e16b3a;
+  --fw-dark-orange-tint-20: #e8825d;
+  --fw-dark-orange-tint-30: #ef9e7e;
+  --fw-dark-orange-tint-40: #f7cbb6;
+  --fw-dark-orange-tint-50: #fbe3d8;
+  --fw-dark-orange-tint-60: #fdf6f3;
+
+  --fw-yellow-shade-50: #291600;
+  --fw-yellow-shade-40: #4c2a04;
+  --fw-yellow-shade-30: #8e4e0a;
+  --fw-yellow-shade-20: #c16c0c;
+  --fw-yellow-shade-10: #e67e14;
+  --fw-yellow-primary: #fde300;
+  --fw-yellow-tint-10: #fde61e;
+  --fw-yellow-tint-20: #fdea3d;
+  --fw-yellow-tint-30: #feee66;
+  --fw-yellow-tint-40: #fef7b2;
+  --fw-yellow-tint-50: #fffad6;
+  --fw-yellow-tint-60: #fffef5;
+
+  --fw-berry-shade-50: #1f0013;
+  --fw-berry-shade-40: #3a0025;
+  --fw-berry-shade-30: #6d0045;
+  --fw-berry-shade-20: #94005d;
+  --fw-berry-shade-10: #af006e;
+  --fw-berry-primary: #c239b3;
+  --fw-berry-tint-10: #cf4fc5;
+  --fw-berry-tint-20: #da6bd3;
+  --fw-berry-tint-30: #e694e0;
+  --fw-berry-tint-40: #f4c4ee;
+  --fw-berry-tint-50: #f9dff6;
+  --fw-berry-tint-60: #fdf5fc;
+
+  /* Shared Colors — Persona */
+  --fw-blue-shade-50: #001322;
+  --fw-blue-shade-40: #002440;
+  --fw-blue-shade-30: #004377;
+  --fw-blue-shade-20: #005ba1;
+  --fw-blue-shade-10: #006cbf;
+  --fw-blue-primary: #0078d4;
+  --fw-blue-tint-10: #1a86d9;
+  --fw-blue-tint-20: #3595de;
+  --fw-blue-tint-30: #5caae5;
+  --fw-blue-tint-40: #a9d3f2;
+  --fw-blue-tint-50: #d0e7f8;
+  --fw-blue-tint-60: #f3f9fd;
+
+  --fw-teal-shade-50: #001516;
+  --fw-teal-shade-40: #002729;
+  --fw-teal-shade-30: #00494e;
+  --fw-teal-shade-20: #006369;
+  --fw-teal-shade-10: #00767d;
+  --fw-teal-primary: #038387;
+  --fw-teal-tint-10: #159195;
+  --fw-teal-tint-20: #2aa0a4;
+  --fw-teal-tint-30: #4cb4b7;
+  --fw-teal-tint-40: #9bd9db;
+  --fw-teal-tint-50: #c7ebec;
+  --fw-teal-tint-60: #f0fafa;
+
+  --fw-purple-shade-50: #0f0717;
+  --fw-purple-shade-40: #1c0e2b;
+  --fw-purple-shade-30: #341a51;
+  --fw-purple-shade-20: #47236e;
+  --fw-purple-shade-10: #542a82;
+  --fw-purple-primary: #5c2e91;
+  --fw-purple-tint-10: #6b3f9e;
+  --fw-purple-tint-20: #7c52ab;
+  --fw-purple-tint-30: #9470bd;
+  --fw-purple-tint-40: #c3afda;
+  --fw-purple-tint-50: #dfd4ec;
+  --fw-purple-tint-60: #f5f2f9;
+
+  --fw-cranberry-shade-50: #200205;
+  --fw-cranberry-shade-40: #3d050a;
+  --fw-cranberry-shade-30: #710a18;
+  --fw-cranberry-shade-20: #9a0d1f;
+  --fw-cranberry-shade-10: #b60f25;
+  --fw-cranberry-primary: #c50f1f;
+  --fw-cranberry-tint-10: #cc2635;
+  --fw-cranberry-tint-20: #d33f4c;
+  --fw-cranberry-tint-30: #dc626d;
+  --fw-cranberry-tint-40: #eeacb2;
+  --fw-cranberry-tint-50: #f6d1d5;
+  --fw-cranberry-tint-60: #fdf3f4;
+
+  --fw-marigold-shade-50: #251a00;
+  --fw-marigold-shade-40: #463100;
+  --fw-marigold-shade-30: #835b00;
+  --fw-marigold-shade-20: #b27c00;
+  --fw-marigold-shade-10: #d39300;
+  --fw-marigold-primary: #eaa300;
+  --fw-marigold-tint-10: #edad1a;
+  --fw-marigold-tint-20: #efb839;
+  --fw-marigold-tint-30: #f2c661;
+  --fw-marigold-tint-40: #f9e2ae;
+  --fw-marigold-tint-50: #fcefd3;
+  --fw-marigold-tint-60: #fefbf4;
+}

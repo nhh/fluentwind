@@ -1,0 +1,5 @@
+/* Custom variant for dark mode — matches any theme ending in "-dark" */
+@custom-variant dark (&:where([data-theme$="-dark"], [data-theme$="-dark"] *));
+
+/* Custom variant for high contrast */
+@custom-variant hc (&:where([data-theme="high-contrast"], [data-theme="high-contrast"] *));

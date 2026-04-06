@@ -1,0 +1,28 @@
+/* ==========================================================================
+   FluentWind — Fluent 2 Design Tokens for Tailwind CSS v4
+
+   Usage:
+     @import 'tailwindcss';
+     @import '@fluentwind/tokens/preset.css';
+   ========================================================================== */
+
+/* Custom variants */
+@import './utils/custom-variants.css';
+
+/* Global raw values */
+@import './themes/global-tokens.css';
+
+/* Theme files (semantic token values) */
+@import './themes/web-light.css';
+@import './themes/web-dark.css';
+@import './themes/teams-light.css';
+@import './themes/teams-dark.css';
+@import './themes/high-contrast.css';
+
+/* @theme token mappings (generate Tailwind utilities) */
+@import './tokens/colors.css';
+@import './tokens/typography.css';
+@import './tokens/spacing.css';
+@import './tokens/borders.css';
+@import './tokens/shadows.css';
+@import './tokens/motion.css';

@@ -1,0 +1,25 @@
+{
+  "name": "@fluentwind/tokens",
+  "version": "0.1.0",
+  "description": "Fluent 2 design tokens as Tailwind CSS v4 preset",
+  "type": "module",
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./preset.css": "./src/preset.css",
+    "./themes/*": "./src/themes/*"
+  },
+  "files": ["dist", "src/**/*.css"],
+  "scripts": {
+    "build": "tsup",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "tsup": "^8",
+    "typescript": "^5"
+  }
+}
