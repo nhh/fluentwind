@@ -41,9 +41,9 @@ export const DataGridRow = memo(
         style={{ ...style, gridTemplateColumns: gridTemplate }}
         className={cn(
           'absolute top-0 left-0 grid w-full transition-colors duration-fast',
-          bordered && 'border-b border-neutral-stroke-3',
+          bordered && !selected && 'border-b border-neutral-stroke-3',
           selected &&
-            'bg-brand-background-2 text-brand-foreground-2 hover:bg-brand-background-2-hover',
+            'bg-brand-background-2 text-neutral-foreground-1 border-l-[3px] border-l-brand-background border-b border-b-brand-stroke-2 hover:bg-brand-background-2-hover',
           !selected && striped && 'bg-neutral-background-2',
           !selected && 'hover:bg-subtle-background-hover',
           focused && !multiSelected && 'ring-2 ring-inset ring-neutral-stroke-focus-2 z-[1]',
