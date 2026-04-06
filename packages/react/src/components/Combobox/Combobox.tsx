@@ -3,10 +3,10 @@ import { cn } from '../../utils/cn';
 import type { ComboboxProps } from './Combobox.types';
 
 const appearanceClasses = {
-  outline: 'bg-neutral-background-1 border border-neutral-stroke-1 hover:border-neutral-stroke-1-hover focus-within:border-brand-stroke-1',
-  underline: 'bg-transparent-background border-b border-neutral-stroke-1 hover:border-neutral-stroke-1-hover focus-within:border-brand-stroke-1',
-  filledDarker: 'bg-neutral-background-3 border border-transparent border-b-neutral-stroke-accessible focus-within:border-b-brand-stroke-1',
-  filledLighter: 'bg-neutral-background-1 border border-transparent border-b-neutral-stroke-accessible focus-within:border-b-brand-stroke-1',
+  outline: 'bg-neutral-background-1 border border-neutral-stroke-1 hover:border-neutral-stroke-1-hover',
+  underline: 'bg-transparent-background border-b border-neutral-stroke-1 hover:border-neutral-stroke-1-hover',
+  filledDarker: 'bg-neutral-background-3 border border-transparent border-b-neutral-stroke-accessible',
+  filledLighter: 'bg-neutral-background-1 border border-transparent border-b-neutral-stroke-accessible',
 };
 
 const sizeClasses = {
@@ -78,7 +78,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
 
     return (
       <div ref={wrapperRef} className={cn('relative inline-block', className)}>
-        <span className={cn('inline-flex items-center gap-xxs w-full transition-colors duration-fast focus-within:ring-2 focus-within:ring-neutral-stroke-focus-2 focus-within:ring-offset-1 focus-within:ring-offset-neutral-stroke-focus-1', appearanceClasses[appearance], sizeClasses[size], disabled && 'opacity-50 cursor-not-allowed')}>
+        <span className={cn('fw-input-underline inline-flex items-center gap-xxs w-full transition-colors duration-fast', appearanceClasses[appearance], sizeClasses[size], disabled && 'opacity-50 cursor-not-allowed')}>
           <input
             ref={ref}
             role="combobox"

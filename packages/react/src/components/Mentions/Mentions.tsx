@@ -4,18 +4,18 @@ import { cn } from '../../utils/cn';
 import type { MentionsProps, MentionOption } from './Mentions.types';
 
 const textareaVariants = cva(
-  'w-full text-neutral-foreground-1 placeholder:text-neutral-foreground-4 outline-none transition-colors duration-fast focus-visible:ring-2 focus-visible:ring-neutral-stroke-focus-2 focus-visible:ring-offset-1 focus-visible:ring-offset-neutral-stroke-focus-1',
+  'fw-input-underline w-full text-neutral-foreground-1 placeholder:text-neutral-foreground-4 outline-none transition-colors duration-fast',
   {
     variants: {
       appearance: {
         outline:
-          'bg-neutral-background-1 border border-neutral-stroke-1 hover:border-neutral-stroke-1-hover focus-visible:border-brand-stroke-1',
+          'bg-neutral-background-1 border border-neutral-stroke-1 hover:border-neutral-stroke-1-hover',
         underline:
-          'bg-transparent-background border-b border-neutral-stroke-1 hover:border-neutral-stroke-1-hover focus-visible:border-brand-stroke-1',
+          'bg-transparent-background border-b border-neutral-stroke-1 hover:border-neutral-stroke-1-hover',
         filledDarker:
-          'bg-neutral-background-3 border border-transparent border-b-neutral-stroke-accessible focus-visible:border-b-brand-stroke-1',
+          'bg-neutral-background-3 border border-transparent border-b-neutral-stroke-accessible',
         filledLighter:
-          'bg-neutral-background-1 border border-transparent border-b-neutral-stroke-accessible focus-visible:border-b-brand-stroke-1',
+          'bg-neutral-background-1 border border-transparent border-b-neutral-stroke-accessible',
       },
       size: {
         small: 'text-200 leading-200 px-s py-xxs rounded-medium',

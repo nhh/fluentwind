@@ -4,18 +4,18 @@ import { cn } from '../../utils/cn';
 import type { SelectProps } from './Select.types';
 
 const selectVariants = cva(
-  'appearance-none cursor-pointer bg-no-repeat bg-[right_8px_center] bg-[length:12px] pr-xl transition-colors duration-fast outline-none text-neutral-foreground-1 focus-visible:ring-2 focus-visible:ring-neutral-stroke-focus-2 focus-visible:ring-offset-1 focus-visible:ring-offset-neutral-stroke-focus-1',
+  'fw-input-underline appearance-none cursor-pointer bg-no-repeat bg-[right_8px_center] bg-[length:12px] pr-xl transition-colors duration-fast outline-none text-neutral-foreground-1',
   {
     variants: {
       appearance: {
         outline:
-          'bg-neutral-background-1 border border-neutral-stroke-1 hover:border-neutral-stroke-1-hover focus-visible:border-brand-stroke-1',
+          'bg-neutral-background-1 border border-neutral-stroke-1 hover:border-neutral-stroke-1-hover',
         underline:
-          'bg-transparent-background border-b border-neutral-stroke-1 hover:border-neutral-stroke-1-hover focus-visible:border-brand-stroke-1',
+          'bg-transparent-background border-b border-neutral-stroke-1 hover:border-neutral-stroke-1-hover',
         filledDarker:
-          'bg-neutral-background-3 border border-transparent border-b-neutral-stroke-accessible focus-visible:border-b-brand-stroke-1',
+          'bg-neutral-background-3 border border-transparent border-b-neutral-stroke-accessible',
         filledLighter:
-          'bg-neutral-background-1 border border-transparent border-b-neutral-stroke-accessible focus-visible:border-b-brand-stroke-1',
+          'bg-neutral-background-1 border border-transparent border-b-neutral-stroke-accessible',
       },
       size: {
         small: 'text-200 leading-200 px-s py-xxs min-h-6 rounded-medium',

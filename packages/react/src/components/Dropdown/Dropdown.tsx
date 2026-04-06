@@ -4,7 +4,7 @@ import { cn } from '../../utils/cn';
 import type { DropdownProps } from './Dropdown.types';
 
 const triggerVariants = cva(
-  'inline-flex items-center justify-between w-full cursor-pointer transition-colors duration-fast outline-none text-neutral-foreground-1 focus-visible:ring-2 focus-visible:ring-neutral-stroke-focus-2 focus-visible:ring-offset-1 focus-visible:ring-offset-neutral-stroke-focus-1',
+  'fw-input-underline inline-flex items-center justify-between w-full cursor-pointer transition-colors duration-fast outline-none text-neutral-foreground-1 focus-visible:ring-2 focus-visible:ring-neutral-stroke-focus-2 focus-visible:ring-offset-1 focus-visible:ring-offset-neutral-stroke-focus-1',
   {
     variants: {
       appearance: {

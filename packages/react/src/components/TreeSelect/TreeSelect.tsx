@@ -4,18 +4,18 @@ import { cn } from '../../utils/cn';
 import type { TreeSelectProps, TreeSelectNode } from './TreeSelect.types';
 
 const triggerVariants = cva(
-  'inline-flex items-center justify-between gap-xs w-full cursor-pointer transition-colors duration-fast outline-none text-neutral-foreground-1 focus-within:ring-2 focus-within:ring-neutral-stroke-focus-2 focus-within:ring-offset-1 focus-within:ring-offset-neutral-stroke-focus-1',
+  'fw-input-underline inline-flex items-center justify-between gap-xs w-full cursor-pointer transition-colors duration-fast outline-none text-neutral-foreground-1',
   {
     variants: {
       appearance: {
         outline:
-          'bg-neutral-background-1 border border-neutral-stroke-1 hover:border-neutral-stroke-1-hover focus-within:border-brand-stroke-1',
+          'bg-neutral-background-1 border border-neutral-stroke-1 hover:border-neutral-stroke-1-hover',
         underline:
-          'bg-transparent-background border-b border-neutral-stroke-1 hover:border-neutral-stroke-1-hover focus-within:border-brand-stroke-1',
+          'bg-transparent-background border-b border-neutral-stroke-1 hover:border-neutral-stroke-1-hover',
         filledDarker:
-          'bg-neutral-background-3 border border-transparent border-b-neutral-stroke-accessible focus-within:border-b-brand-stroke-1',
+          'bg-neutral-background-3 border border-transparent border-b-neutral-stroke-accessible',
         filledLighter:
-          'bg-neutral-background-1 border border-transparent border-b-neutral-stroke-accessible focus-within:border-b-brand-stroke-1',
+          'bg-neutral-background-1 border border-transparent border-b-neutral-stroke-accessible',
       },
       size: {
         small: 'text-200 leading-200 px-s py-xxs min-h-6 rounded-medium',

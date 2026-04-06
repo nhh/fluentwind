@@ -4,6 +4,36 @@
 /* Tell Tailwind to scan the component library source for class names */
 @source "../../../packages/react/src";
 
+/* Kill default browser focus outline — FluentWind uses ring utilities */
+*:focus,
+*:focus-visible {
+  outline: none !important;
+}
+
+/* Fluent input focus underline — brand-colored bar that scales from center on focus */
+.fw-input-underline {
+  position: relative;
+}
+.fw-input-underline::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  border-radius: 0 0 4px 4px;
+  background: var(--color-brand-stroke-1);
+  transform: scaleX(0);
+  transition: transform 150ms ease;
+  transform-origin: center;
+}
+.fw-input-underline:focus-within::after {
+  transform: scaleX(1);
+}
+.fw-input-underline:focus-within {
+  box-shadow: none !important;
+}
+
 /* Shiki code blocks */
 .shiki-block pre {
   margin: 0;

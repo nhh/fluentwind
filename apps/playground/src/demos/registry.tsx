@@ -6,6 +6,7 @@ import { navigationDemos } from './navigation';
 import { feedbackDemos } from './feedback';
 import { overlayDemos } from './overlay';
 import { layoutDemos } from './layout';
+import { newComponentDemos } from './newComponents';
 
 export const registry: Record<string, ComponentPageProps> = {
   ...generalDemos,
@@ -15,4 +16,5 @@ export const registry: Record<string, ComponentPageProps> = {
   ...feedbackDemos,
   ...overlayDemos,
   ...layoutDemos,
+  ...newComponentDemos,
 };
