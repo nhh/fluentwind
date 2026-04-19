@@ -11,11 +11,11 @@ const cardVariants = cva(
         filled:
           'bg-neutral-background-1 shadow-4',
         filledAlternative:
-          'bg-neutral-background-2 shadow-4',
+          'bg-neutral-background-2 dark:bg-neutral-background-6 shadow-4',
         outline:
           'bg-neutral-background-1 border border-neutral-stroke-1 shadow-none',
         subtle:
-          'bg-subtle-background shadow-none',
+          'bg-subtle-background shadow-none dark:border dark:border-neutral-stroke-2',
       },
       size: {
         small: 'p-s gap-s',

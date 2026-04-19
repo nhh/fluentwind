@@ -1,0 +1,338 @@
+[
+  {
+    "component": "_global",
+    "theme": "all",
+    "check": "audit-infrastructure",
+    "severity": "critical",
+    "note": "Visual regression baselines are broken. All 400 snapshots under apps/playground/e2e/visual/component-screenshots.spec.ts-snapshots/ resolve to 80 unique images, each duplicated 5 times — meaning every component's 5 theme variants are BYTE-IDENTICAL (verified via md5sum). The visual test suite's 840 tests trivially pass because switchTheme(...) in the fixture is not actually applying themes to the captured `main` element, OR the baselines were generated before theme-switching was fixed (see commit f534478 'Fix theme switching') and never regenerated. Consequence: the audit's planned snapshot-based per-theme review is impossible until baselines are regenerated. Likely root cause: page.goto() in navigateToComponent() triggers a full page load and useState<Theme>('web-light') in App.tsx:141 resets the theme; switchTheme click fires but the 400ms waitForTimeout may be captured before React state + CSS custom-property cascade flush. Required action before any per-theme audit: (1) verify switchTheme actually changes the data-theme attribute on the provider wrapper div at screenshot time (add console.log or DOM assertion); (2) regenerate all baselines via `pnpm --filter playground exec playwright test visual --update-snapshots`; (3) re-run md5sum check — if any two themes still match, the fixture or provider is broken. Until fixed, no HC / dark / teams findings can be verified from snapshots.",
+    "evidencePath": "apps/playground/e2e/visual/component-screenshots.spec.ts-snapshots/"
+  },
+  {
+    "component": "Button",
+    "theme": "high-contrast",
+    "check": "high-contrast",
+    "severity": "critical",
+    "note": "Primary appearance hardcodes '[color:white]' (Button.tsx:14). In HC theme, --fw-neutral-foreground-on-brand is #000000 and --fw-brand-background is #1aebff (bright cyan), so primary button renders white-on-cyan — WCAG AA fail, near-illegible. The 'fix primary button white text eaten by tailwind-merge' workaround bypasses the token. Proper fix: restore 'text-neutral-foreground-on-brand' token and resolve the twMerge collision at the cn() level (e.g. apply token class AFTER appearance variant, or use tailwind-merge classGroup config). [NOTE: cannot be verified in current snapshots — see _global audit-infrastructure finding.]",
+    "evidencePath": "packages/react/src/components/Button/Button.tsx:14"
+  },
+  {
+    "component": "Button",
+    "theme": "all",
+    "check": "color-tokens",
+    "severity": "major",
+    "note": "Primary appearance uses arbitrary '[color:white]' instead of a token. Even in light/dark themes this is an escape hatch that future token edits (brand ramp customization, contrast adjustments) cannot propagate into.",
+    "evidencePath": "packages/react/src/components/Button/Button.tsx:14"
+  },
+  {
+    "component": "Alert",
+    "theme": "all",
+    "check": "color-tokens",
+    "severity": "major",
+    "note": "Dismiss button uses 'hover:bg-white/20' (Alert.tsx:119) instead of a semantic token. Breaks on themes where the alert background is already light (MessageBar-style inverse appearances). Should use a neutral-background token or subtle-background variant.",
+    "evidencePath": "packages/react/src/components/Alert/Alert.tsx:119"
+  },
+  {
+    "component": "Drawer",
+    "theme": "all",
+    "check": "color-tokens",
+    "severity": "minor",
+    "note": "Backdrop uses 'bg-black/40' (Drawer.tsx:120). Consistent with Dialog/Tour but not theme-aware — a backdrop token (e.g. --color-backdrop, --color-scrim) would let HC force #000 solid and let light/dark themes tune opacity independently.",
+    "evidencePath": "packages/react/src/components/Drawer/Drawer.tsx:120"
+  },
+  {
+    "component": "Dialog",
+    "theme": "all",
+    "check": "color-tokens",
+    "severity": "minor",
+    "note": "Backdrop uses 'backdrop:bg-black/40' (Dialog.tsx:65). Same as Drawer — should come from a scrim/backdrop token.",
+    "evidencePath": "packages/react/src/components/Dialog/Dialog.tsx:65"
+  },
+  {
+    "component": "Tour",
+    "theme": "all",
+    "check": "color-tokens",
+    "severity": "minor",
+    "note": "Backdrop uses 'bg-black/50' (Tour.tsx:157) — even heavier than Dialog/Drawer (/40). Inconsistent opacity for the same conceptual element.",
+    "evidencePath": "packages/react/src/components/Tour/Tour.tsx:157"
+  },
+  {
+    "component": "ColorPicker",
+    "theme": "all",
+    "check": "color-tokens",
+    "severity": "polish",
+    "note": "Default swatch palette (ColorPicker.tsx:7-20) hardcodes 14 hex values. This is acceptable for a color picker's default palette (these are brand-independent display colors), but 'defaultValue = \"#0078D4\"' (line 59) is a hardcoded Microsoft blue that should default to --fw-brand-background for brand-ramp customization to take effect.",
+    "evidencePath": "packages/react/src/components/ColorPicker/ColorPicker.tsx:59"
+  },
+  {
+    "component": "Badge",
+    "theme": "all",
+    "check": "typography-tokens",
+    "severity": "minor",
+    "note": "Sizes 'tiny' and 'extraSmall' use 'text-[0px]' (Badge.tsx:11-12) to hide text. Works but is an arbitrary value; a dedicated 'sr-only' pattern or visibility:hidden would be more semantic.",
+    "evidencePath": "packages/react/src/components/Badge/Badge.tsx:11"
+  },
+  {
+    "component": "Avatar",
+    "theme": "all",
+    "check": "typography-tokens",
+    "severity": "minor",
+    "note": "Sizes 16 and 20 use 'text-[8px]' and 'text-[10px]' (Avatar.tsx:6-7) instead of the typography token scale. The token scale starts at text-100 (12px), so very-small avatars fall outside the system. Either extend the scale (text-50, text-75) or accept these as avatar-specific off-scale.",
+    "evidencePath": "packages/react/src/components/Avatar/Avatar.tsx:6"
+  },
+  {
+    "component": "Avatar",
+    "theme": "all",
+    "check": "spacing-grid",
+    "severity": "minor",
+    "note": "Sizes 72 and 120 use 'h-[72px] w-[72px]' / 'h-[120px] w-[120px]' (Avatar.tsx:16,18). Off the Tailwind spacing scale. Should map to fixed size tokens or be converted (w-18, w-30 equivalents).",
+    "evidencePath": "packages/react/src/components/Avatar/Avatar.tsx:16"
+  },
+  {
+    "component": "Avatar",
+    "theme": "web-light",
+    "check": "color-tokens",
+    "severity": "minor",
+    "note": "In the demo 'Active State & Colors' row, color='colorful' avatar with initial 'C' renders near-white (very low contrast with surrounding neutral-background-1). The deterministic hash-to-color mapping for 'colorful' includes a palette slot too close to white for light themes. Audit the color set used by the 'colorful' variant and remove/replace any slot that collapses below the 3:1 non-text contrast threshold against the surface background.",
+    "evidencePath": "apps/playground/e2e/visual/component-screenshots.spec.ts-snapshots/Avatar-web-light-chromium-win32.png"
+  },
+  {
+    "component": "Checkbox",
+    "theme": "all",
+    "check": "typography-tokens",
+    "severity": "minor",
+    "note": "Icon sizes use 'text-[10px]' / 'text-[14px]' (Checkbox.tsx:6-7). Below the token scale minimum. Consider an icon-size token (like --size-icon-small/medium) rather than leaning on text-size.",
+    "evidencePath": "packages/react/src/components/Checkbox/Checkbox.tsx:6"
+  },
+  {
+    "component": "FloatButton",
+    "theme": "all",
+    "check": "typography-tokens",
+    "severity": "minor",
+    "note": "Icon wrapper uses 'text-[20px]' (FloatButton.tsx:48). Off-token; an icon size token would be cleaner.",
+    "evidencePath": "packages/react/src/components/FloatButton/FloatButton.tsx:48"
+  },
+  {
+    "component": "FloatButton",
+    "theme": "all",
+    "check": "spacing-grid",
+    "severity": "minor",
+    "note": "Badge bubble uses 'min-w-[18px] h-[18px]' (FloatButton.tsx:68). Off the spacing scale. Use a named badge-size token.",
+    "evidencePath": "packages/react/src/components/FloatButton/FloatButton.tsx:68"
+  },
+  {
+    "component": "Spinner",
+    "theme": "all",
+    "check": "radius-tokens",
+    "severity": "minor",
+    "note": "Border widths 'border-[1.5px]' / 'border-[3px]' (Spinner.tsx:6-7,10-11). Not in the border-width token set (1px, 2px, 4px default). A stroke-width scale token would help.",
+    "evidencePath": "packages/react/src/components/Spinner/Spinner.tsx:6"
+  },
+  {
+    "component": "RadioGroup",
+    "theme": "all",
+    "check": "radius-tokens",
+    "severity": "minor",
+    "note": "Selected state uses 'checked:border-[5px]' (RadioGroup.tsx:95) to create the inner dot via thick border. Works but arbitrary; also makes the dot size non-responsive to the radio size prop.",
+    "evidencePath": "packages/react/src/components/RadioGroup/RadioGroup.tsx:95"
+  },
+  {
+    "component": "Switch",
+    "theme": "all",
+    "check": "spacing-grid",
+    "severity": "minor",
+    "note": "Thumb position hardcoded via 'left-[3px] peer-checked:left-[23px]' (Switch.tsx:43). Off the spacing scale and non-responsive to size variants. Tokens or computed positioning via translate would be more flexible.",
+    "evidencePath": "packages/react/src/components/Switch/Switch.tsx:43"
+  },
+  {
+    "component": "Drawer",
+    "theme": "all",
+    "check": "spacing-grid",
+    "severity": "minor",
+    "note": "Size map uses 'w-[320px]/[480px]/[640px]' and 'h-[30vh]/[50vh]/[70vh]' (Drawer.tsx:8-17). Reasonable for a drawer, but worth tokenizing as --size-drawer-small/medium/large for consistency with other overlays.",
+    "evidencePath": "packages/react/src/components/Drawer/Drawer.tsx:8"
+  },
+  {
+    "component": "Dialog",
+    "theme": "all",
+    "check": "spacing-grid",
+    "severity": "minor",
+    "note": "Dialog panel sets 'max-w-[600px]' inline (Dialog.tsx:86). Other overlays use different caps (HoverCard 280/Tooltip n/a/Popover 200/Tour 340). No shared overlay-max-width token — inconsistent sizing across overlays.",
+    "evidencePath": "packages/react/src/components/Dialog/Dialog.tsx:86"
+  },
+  {
+    "component": "Tour",
+    "theme": "all",
+    "check": "state-distinctness",
+    "severity": "minor",
+    "note": "Step indicator dots use 'w-[6px] h-[6px]' (Tour.tsx:192). Off-scale, and likely too small for WCAG 2.2 target-size at the click target (SC 2.5.8 requires 24×24). If these are clickable, they fail.",
+    "evidencePath": "packages/react/src/components/Tour/Tour.tsx:192"
+  },
+  {
+    "component": "Mentions",
+    "theme": "all",
+    "check": "spacing-grid",
+    "severity": "minor",
+    "note": "Avatar thumbnail uses 'w-[24px] h-[24px]' (Mentions.tsx:209). Use Avatar size=24 or the w-6 Tailwind class instead of arbitrary.",
+    "evidencePath": "packages/react/src/components/Mentions/Mentions.tsx:209"
+  },
+  {
+    "component": "Nav",
+    "theme": "all",
+    "check": "spacing-grid",
+    "severity": "polish",
+    "note": "Active indicator uses 'before:w-[2px]' (Nav.tsx:49). 2px is below the 4px grid; consistent with Tablist, but both should share an indicator-width token.",
+    "evidencePath": "packages/react/src/components/Nav/Nav.tsx:49"
+  },
+  {
+    "component": "Tablist",
+    "theme": "all",
+    "check": "spacing-grid",
+    "severity": "polish",
+    "note": "Active indicator uses 'after:h-[2px]' / 'after:w-[2px]' (Tablist.tsx:125,128). Same 2px off-grid as Nav — should share an indicator-width token.",
+    "evidencePath": "packages/react/src/components/Tablist/Tablist.tsx:125"
+  },
+  {
+    "component": "Slider",
+    "theme": "all",
+    "check": "spacing-grid",
+    "severity": "minor",
+    "note": "Thumb offset uses '-mt-[7px]' (Slider.tsx:17). Arbitrary; likely fragile if track or thumb size tokens change.",
+    "evidencePath": "packages/react/src/components/Slider/Slider.tsx:17"
+  },
+  {
+    "component": "_global",
+    "theme": "high-contrast",
+    "check": "high-contrast",
+    "severity": "major",
+    "note": "The 'hc:' custom variant is defined in preset.css but is NEVER used in any component under packages/react/src/components. Components cannot add HC-specific tweaks (forced borders on filled surfaces, disabled shadows, alternate layouts). All HC behavior is locked to token substitution, which can't express structural changes. Audit targets: Button (primary text), Card (needs HC border since elevation becomes meaningless), any shadow-only affordance (shadows don't render in HC).",
+    "evidencePath": "packages/tokens/src/preset.css:21"
+  },
+  {
+    "component": "_global",
+    "theme": "all",
+    "check": "motion-tokens",
+    "severity": "minor",
+    "note": "Animation shorthand classes embed raw durations (e.g. 'animate-[fw-fade-slide-in_150ms_var(--ease-decelerate-mid)]') across 10+ components (Dialog, Drawer, Tour, Tooltip, Popover, Menu, Mentions, ContextMenu, Popconfirm, HoverCard, Menubar, Dropdown, Notification, Toast, Skeleton). The easing is tokenized via var() but the duration is not — changing --duration-normal won't propagate. Either wrap in CSS utility classes or compose via var(--duration-*) inside the animate shorthand.",
+    "evidencePath": "packages/react/src/components/Dialog/Dialog.tsx:65"
+  },
+  {
+    "component": "_global",
+    "theme": "all",
+    "check": "spacing-grid",
+    "severity": "minor",
+    "note": "Z-index is unmanaged. Raw values used: z-50 (8 components), z-[999] (Drawer), z-[1000] (Drawer), z-[9998]/[9999] (Tour, Toast, Notification), z-[1] (DataGrid, Segmented). No stacking-order token hierarchy. Risk: Toast above Tour above Drawer above Dialog is not enforced by tokens, only by current hardcoded numbers. Introduce --z-dropdown / --z-overlay / --z-modal / --z-toast / --z-tooltip tokens.",
+    "evidencePath": "packages/react/src/components/Drawer/Drawer.tsx:92"
+  },
+  {
+    "component": "Button",
+    "theme": "web-dark",
+    "check": "state-distinctness",
+    "severity": "major",
+    "note": "In dark mode, appearances 'secondary', 'outline', 'subtle', and 'transparent' all render as nearly identical dark chips against card surfaces. The hierarchy between them collapses — users cannot tell which is the primary secondary action vs a subtle one. Root cause: the non-primary appearance tokens in web-dark.css resolve to similar values (neutral-background-1 ≈ subtle-background ≈ transparent) when the surrounding card is also neutral-background-2. Either tune the appearance tokens so secondary has a clearly filled surface, or add an explicit border-width/tone differentiation per appearance in dark themes.",
+    "evidencePath": "docs/audit/dark-screenshots/Button.png"
+  },
+  {
+    "component": "Button",
+    "theme": "web-dark",
+    "check": "state-distinctness",
+    "severity": "minor",
+    "note": "Disabled vs disabled-focusable states are indistinguishable in dark mode (both render as dim gray without the subtle tonal contrast used in light theme).",
+    "evidencePath": "docs/audit/dark-screenshots/Button.png"
+  },
+  {
+    "component": "Card",
+    "theme": "web-dark",
+    "check": "dark-mode",
+    "severity": "major",
+    "note": "Two critical issues: (1) 'Subtle' appearance renders with NO visible bounds in dark — card silhouette is completely lost, which breaks the 'Card' semantic. (2) 'FilledAlternative' appearance is DARKER than the body background, creating a 'hole-in-the-page' effect rather than elevation. Fluent's intent is that filledAlternative sits slightly above the base surface; in dark themes this inverts because neutral-background-2 (body) is lighter than neutral-background-3 (card). Either swap the token mapping in web-dark.css or add 'hc:'-style structural overrides.",
+    "evidencePath": "docs/audit/dark-screenshots/Card.png"
+  },
+  {
+    "component": "Card",
+    "theme": "web-dark",
+    "check": "dark-mode",
+    "severity": "minor",
+    "note": "Card titles render in a dim secondary color (neutral-foreground-2), which is readable but visually recedes more than it should for primary headings. Consider neutral-foreground-1 for CardTitle in dark.",
+    "evidencePath": "docs/audit/dark-screenshots/Card.png"
+  },
+  {
+    "component": "Input",
+    "theme": "web-dark",
+    "check": "dark-mode",
+    "severity": "minor",
+    "note": "'Filled lighter' appearance in dark mode is nearly indistinguishable from the surrounding card surface — the input's boundary dissolves. Adjust the filledLighter token in web-dark.css so the input visibly sits on the card, or rely on a stronger border-bottom.",
+    "evidencePath": "docs/audit/dark-screenshots/Input.png"
+  },
+  {
+    "component": "Badge",
+    "theme": "web-dark",
+    "check": "dark-mode",
+    "severity": "major",
+    "note": "Multiple badge appearances fail in dark: (1) 'Ghost' is invisible (transparent on transparent, no border). (2) 'Informative' color is near-black on near-black. (3) 'Subtle' color is invisible. (4) 'Important' inverts correctly but is harsh white-on-black with no border. These look correct in light theme but the palette tokens don't have dark-mode equivalents for several variants.",
+    "evidencePath": "docs/audit/dark-screenshots/Badge.png"
+  },
+  {
+    "component": "Tag",
+    "theme": "web-dark",
+    "check": "dark-mode",
+    "severity": "major",
+    "note": "Three failures: (1) 'Filled' tag text is illegible (very dim gray on dim gray surface). (2) 'Small' size text is essentially unreadable due to low contrast + small size. (3) 'Disabled' state is invisible. Tag needs a dedicated dark-theme fill or higher-contrast foreground.",
+    "evidencePath": "docs/audit/dark-screenshots/Tag.png"
+  },
+  {
+    "component": "Avatar",
+    "theme": "web-dark",
+    "check": "dark-mode",
+    "severity": "major",
+    "note": "In the 'Active State & Colors' demo, two of the 'colorful' palette slots (initials 'C' and 'N') render as near-black circles on the near-black card background — effectively invisible. The deterministic hash-to-color palette must include slots that pass ≥ 3:1 contrast against BOTH the lightest and darkest theme surfaces. This is the dark-mode counterpart to the existing web-light 'C-slot too white' finding.",
+    "evidencePath": "docs/audit/dark-screenshots/Avatar.png"
+  },
+  {
+    "component": "Checkbox",
+    "theme": "web-dark",
+    "check": "dark-mode",
+    "severity": "minor",
+    "note": "Unchecked-state border (neutral-stroke-1/2) is very subtle in dark against a dark card surface — users scanning a form may miss the control. Disabled-unchecked is nearly invisible. Consider neutral-stroke-accessible in dark to meet 3:1 for active UI components (WCAG 1.4.11).",
+    "evidencePath": "docs/audit/dark-screenshots/Checkbox.png"
+  },
+  {
+    "component": "Accordion",
+    "theme": "web-dark",
+    "check": "dark-mode",
+    "severity": "minor",
+    "note": "Item separators (between collapsed rows) and the chevron/arrow icons render extremely dim in dark mode. Collapsed items visually blend into one large strip. Raise separator token contrast or use a visible divider color in dark.",
+    "evidencePath": "docs/audit/dark-screenshots/Accordion.png"
+  },
+  {
+    "component": "DataGrid",
+    "theme": "web-dark",
+    "check": "dark-mode",
+    "severity": "minor",
+    "note": "Alternating row backgrounds (zebra striping) are nearly identical in dark mode — the row-alt token isn't differentiated enough from neutral-background-1. Widen the gap slightly for scanability.",
+    "evidencePath": "docs/audit/dark-screenshots/DataGrid.png"
+  },
+  {
+    "component": "Table",
+    "theme": "web-dark",
+    "check": "dark-mode",
+    "severity": "minor",
+    "note": "Row separators / horizontal dividers in Table's 'Sortable Columns' demo render very faint in dark, reducing row separation when there is no hover state.",
+    "evidencePath": "docs/audit/dark-screenshots/Table.png"
+  },
+  {
+    "component": "Spinner",
+    "theme": "web-dark",
+    "check": "dark-mode",
+    "severity": "minor",
+    "note": "'Primary' appearance spinner shows a dim gray track/arc instead of brand color in dark — users cannot tell it is animating against the card. Verify the primary appearance reads its color from --fw-brand-stroke-1 (or equivalent) rather than a neutral token. Also: inline label ('Loading...') uses neutral-foreground-2 which is too dim on dark cards.",
+    "evidencePath": "docs/audit/dark-screenshots/Spinner.png"
+  },
+  {
+    "component": "_global",
+    "theme": "web-dark",
+    "check": "dark-mode",
+    "severity": "minor",
+    "note": "Across Dialog, Menu, Toast, Tooltip demos the trigger buttons (rendered via Button 'secondary' appearance) consistently show low contrast in dark. This is a downstream symptom of the Button dark-appearance finding above — fixing the Button secondary appearance in dark will resolve these simultaneously.",
+    "evidencePath": "docs/audit/dark-screenshots/Dialog.png"
+  }
+]

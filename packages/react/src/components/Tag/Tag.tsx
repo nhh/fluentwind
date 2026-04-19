@@ -8,7 +8,7 @@ const tagVariants = cva(
   {
     variants: {
       appearance: {
-        filled: 'bg-neutral-background-3 text-neutral-foreground-1',
+        filled: 'bg-neutral-background-3 text-neutral-foreground-1 dark:bg-neutral-background-6',
         outline: 'bg-transparent text-neutral-foreground-1 border border-neutral-stroke-1',
         brand: 'bg-brand-background text-neutral-foreground-on-brand',
       },
@@ -57,7 +57,7 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(
         ref={ref}
         className={cn(
           tagVariants({ appearance, size, shape }),
-          disabled && 'opacity-50 cursor-not-allowed',
+          disabled && 'opacity-50 dark:opacity-60 cursor-not-allowed',
           className,
         )}
         {...props}

@@ -20,9 +20,9 @@ const sizeMap: Record<AvatarSize, string> = {
 };
 
 const colorMap = {
-  neutral: 'bg-neutral-background-6 text-neutral-foreground-3',
+  neutral: 'bg-neutral-background-6 text-neutral-foreground-3 dark:text-neutral-foreground-1',
   brand: 'bg-brand-background text-neutral-foreground-on-brand',
-  colorful: 'bg-brand-background-2 text-brand-foreground-2',
+  colorful: 'bg-brand-background-2 text-brand-foreground-2 dark:bg-brand-background-static dark:text-neutral-foreground-on-brand',
 };
 
 function getInitials(name?: string): string {

@@ -29,6 +29,11 @@ export const test = base.extend<{
         exact: true,
       });
       await themeBtn.click();
+      await page.waitForFunction(
+        (expected) => document.querySelector(`[data-theme="${expected}"]`) !== null,
+        theme,
+        { timeout: 3000 },
+      );
     });
   },
 });
